@@ -1,0 +1,700 @@
+﻿<Window x:Class="CMS.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CMS" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Menu" Height="710" Width="1280" Background="Transparent" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closed="Window_Closed" Loaded="Window_Loaded">
+
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="261"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="White" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5">
+            <Grid Grid.Row="1" >
+                <!--<Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFB9B9B9" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.263"/>
+                </LinearGradientBrush>
+                 </Grid.Background>-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="71"/>
+                    <RowDefinition Height="521*"/>
+                </Grid.RowDefinitions>
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="20" Color="#FFC9C9C9"/>
+                </Grid.Effect>
+                <Grid Margin="0,0,0,46" >
+                    <Image Grid.Row="1" Source="ezgif.com-gif-maker.png" Margin="0,0,0,-38" RenderTransformOrigin="0.496,0.329"/>
+                    <materialDesign:Flipper HorizontalAlignment="Right"  VerticalAlignment="Top" Width="261" Style="{StaticResource MaterialDesignCardFlipper}"
+             RenderTransformOrigin="0,0" Height="75" Margin="-2,81,0,-122">
+                        <materialDesign:Flipper.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.007"/>
+                                <TranslateTransform X="-0.014" Y="0.011"/>
+                            </TransformGroup>
+                        </materialDesign:Flipper.RenderTransform>
+                        <materialDesign:Flipper.FrontContent>
+                            <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="1" Height="65" Background="Transparent" Foreground="#FF3F51B5" BorderBrush="Transparent">
+                                <Grid>
+                                    <materialDesign:PackIcon Kind="AccountCircle" Height="60" Margin="5,0,0,0" Width="60" HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                    <TextBlock x:Name="lblname" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="70,5,0,0" Width="158" FontSize="18"></TextBlock>
+                                    <TextBlock x:Name="lblid" Text="" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="70,0,0,5" Width="158" FontSize="18"></TextBlock>
+                                </Grid>
+                            </Button>
+                        </materialDesign:Flipper.FrontContent>
+                        <materialDesign:Flipper.BackContent>
+                            <Button
+      Style="{StaticResource MaterialDesignFlatButton}"
+      Command="{x:Static materialDesign:Flipper.FlipCommand}"
+      Margin="8"
+      Width="184"
+      Content="GO BACK" />
+                        </materialDesign:Flipper.BackContent>
+                    </materialDesign:Flipper>
+                </Grid>
+
+                <StackPanel HorizontalAlignment="Right" Width="261" Height="520" VerticalAlignment="Bottom" Grid.Row="2" Grid.RowSpan="2" >
+
+                    <Rectangle Height="5" Fill="#FF003097"></Rectangle>
+                    <Button x:Name="inventory"  Margin="15,20,15,20" Height="50" Click="inventory_Click">
+                        <Grid Width="200" Height="40">
+                            <materialDesign:PackIcon Kind="ClipboardListOutline" Height="40" Width="37" ></materialDesign:PackIcon>
+                            <TextBlock Text="Inventory" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6" Width="158" FontSize="18"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="register" Margin="15,0,15,20" Height="50" Click="register_Click">
+                        <Grid Width="200" Height="40">
+                            <materialDesign:PackIcon Kind="FileEditOutline" Height="40" Width="37" ></materialDesign:PackIcon>
+                            <TextBlock Text="Parts Registration" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6" Width="158" FontSize="18"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="transact" Margin="15,0,15,20" Height="50" Click="transact_Click">
+                        <Grid Width="200" Height="40">
+                            <materialDesign:PackIcon Kind="FileSearchOutline" Height="40" Width="37" ></materialDesign:PackIcon>
+                            <TextBlock Text="Parts Transaction" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6" Width="158" FontSize="18"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="manage" Margin="15,0,15,20" Height="50" Click="manage_Click">
+                        <Grid Width="200" Height="40">
+                            <materialDesign:PackIcon Kind="cog" Height="40" Width="37" ></materialDesign:PackIcon>
+                            <TextBlock Text="Maintenance" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6" Width="158" FontSize="18"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="h3" Visibility="Hidden"  Margin="15,0,15,20" Height="50" Click="manage_Click">
+                        <Grid Width="200" Height="40">
+                            <materialDesign:PackIcon Kind="cog" Height="40" Width="37" ></materialDesign:PackIcon>
+                            <TextBlock Text="Maintenance" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6" Width="158" FontSize="18"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="h2" Visibility="Hidden"  Margin="15,0,15,20" Height="50" Click="manage_Click">
+                        <Grid Width="200" Height="40">
+                            <materialDesign:PackIcon Kind="cog" Height="40" Width="37" ></materialDesign:PackIcon>
+                            <TextBlock Text="Maintenance" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6" Width="158" FontSize="18"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="logout" Margin="15,0,15,20" Height="50" Click="logout_Click" >
+                        <Grid Width="200" Height="40">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <materialDesign:PackIcon Kind="Logout" Height="40" Width="37" Grid.RowSpan="2" ></materialDesign:PackIcon>
+                            <TextBlock Text="Logout" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8" Width="158" FontSize="18" Grid.RowSpan="2"></TextBlock>
+                        </Grid>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <TabControl x:Name="tabs" Grid.Column="1" Margin="7,0,0,0" BorderBrush="White" Background="White" TabStripPlacement="Left">
+            <!--<TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </TabControl.ItemContainerStyle>-->
+            <TabControl.Resources>
+
+                <Style TargetType="{x:Type TabControl}">
+                    <Setter Property="TabStripPlacement" Value="Left" />
+                    <Setter Property="Margin" Value="2" />
+                    <Setter Property="Padding" Value="2"    />
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabControl}">
+                                <Grid ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Name="ColumnDefinition0" />
+                                        <ColumnDefinition Width="0" Name="ColumnDefinition1" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" Name="RowDefinition0" />
+                                        <RowDefinition Height="*" Name="RowDefinition1" />
+                                    </Grid.RowDefinitions>
+                                    <Border x:Name="HeaderBorder"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            CornerRadius="5"
+                            Background="#FAFAFA"
+                            Margin="0,0,0,5">
+                                        <TabPanel IsItemsHost="True"
+                                  Name="HeaderPanel"
+                                  Panel.ZIndex="1"
+                                  KeyboardNavigation.TabIndex="1"
+                                  Grid.Column="0"
+                                  Grid.Row="0" />
+                                    </Border>
+                                    <Grid Name="ContentPanel"
+                          KeyboardNavigation.TabIndex="2"
+                          KeyboardNavigation.TabNavigation="Local"
+                          KeyboardNavigation.DirectionalNavigation="Contained"
+                          Grid.Column="0"
+                          Grid.Row="1">
+                                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                                            <ContentPresenter Content="{TemplateBinding SelectedContent}"
+                                              ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+                                              ContentStringFormat="{TemplateBinding SelectedContentStringFormat}"
+                                              ContentSource="SelectedContent"
+                                              Name="PART_SelectedContentHost"
+                                              Margin="2"
+                                              SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="TabControl.TabStripPlacement" Value="Bottom">
+                                        <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="1" />
+                                        <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                                        <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+                                        <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="Auto" />
+                                        <Setter TargetName="HeaderBorder" Property="FrameworkElement.Margin" Value="0,5,0,0" />
+                                    </Trigger>
+                                    <Trigger Property="TabControl.TabStripPlacement" Value="Left">
+                                        <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="0" />
+                                        <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                                        <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="0" />
+                                        <Setter TargetName="ContentPanel" Property="Grid.Column" Value="1" />
+                                        <Setter TargetName="ColumnDefinition0" Property="ColumnDefinition.Width" Value="Auto" />
+                                        <Setter TargetName="ColumnDefinition1" Property="ColumnDefinition.Width" Value="*" />
+                                        <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+                                        <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="0" />
+                                        <Setter TargetName="HeaderBorder" Property="FrameworkElement.Margin" Value="0,0,5,0" />
+                                    </Trigger>
+                                    <Trigger Property="TabControl.TabStripPlacement" Value="Right">
+                                        <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="0" />
+                                        <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                                        <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="1" />
+                                        <Setter TargetName="ContentPanel" Property="Grid.Column" Value="0" />
+                                        <Setter TargetName="ColumnDefinition0" Property="ColumnDefinition.Width" Value="*" />
+                                        <Setter TargetName="ColumnDefinition1" Property="ColumnDefinition.Width" Value="Auto" />
+                                        <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+                                        <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="0" />
+                                        <Setter TargetName="HeaderBorder" Property="FrameworkElement.Margin" Value="5,0,0,0" />
+                                    </Trigger>
+                                    <Trigger Property="UIElement.IsEnabled" Value="False">
+                                        <Setter Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="TabItem4" TabIndex="0">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="1000">
+                        <materialDesign:PackIcon Kind="Chip" VerticalAlignment="Center" HorizontalAlignment="Left" Width="54" Height="48"/>
+                        <TextBlock TextWrapping="Wrap" Text="KANBAN EPSON" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,-48,0,0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem1" TabIndex="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1">
+                        <TabControl HorizontalAlignment="Left"  Margin="0" VerticalAlignment="Top" TabStripPlacement="Top" Height="605" Width="990">
+                            <TabItem Header="Parts Registration" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="563" VerticalAlignment="Top"  Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="493" Margin="15,39,0,0" VerticalAlignment="Top" Width="478" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="84*"/>
+                                                <ColumnDefinition Width="80*"/>
+                                                <ColumnDefinition Width="163*"/>
+                                                <ColumnDefinition Width="149*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="59*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Ionics PN:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="111" Grid.ColumnSpan="2"/>
+                                            <!-- <Label Content="Customer PN:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            =-->
+                                            <Label Content="DID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="1" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Lot Number:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="5" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Quantity:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="7" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="9" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Button x:Name="btn_reg" Click="btn_reg_Click" Content="REGISTER" Grid.Column="2" HorizontalAlignment="Left" Margin="31,13,0,0" Grid.Row="12" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF5AB53F" Grid.RowSpan="2"/>
+                                            <Button x:Name="btn_reset_reg" Click="btn_reset_reg_Click" Content="RESET" Grid.Column="3" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="12" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Grid.RowSpan="2"/>
+                                            <TextBox x:Name="r_ipn" KeyDown="r_ipn_KeyDown"  Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <!--      <TextBox x:Name="r_cpn" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                       =-->
+                                            <TextBox x:Name="r_did" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" KeyDown="r_did_KeyDown"/>
+                                            <TextBox x:Name="r_lotnum" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="r_qty" KeyDown="r_qty_KeyDown" PreviewTextInput="r_qty_PreviewTextInput" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="r_invonum" KeyDown="r_invonum_KeyDown" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <Label Content="Remarks:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="11" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="r_remarks" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="11" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="#FF4F87FF" CornerRadius="10" BorderThickness="2" HorizontalAlignment="Left" Height="370" Margin="520,99,0,0" VerticalAlignment="Top" Width="447" Background="#FFF9F9F9">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="161*"/>
+                                                <ColumnDefinition Width="270*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="30*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Parts Details" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="156" FontSize="24"/>
+                                            <Label Content="Supplier:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="31" Width="137"/>
+                                            <Label Content="Maker Code:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="31" Width="137"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="6" Height="31" Width="137"/>
+                                            <Label Content="Component type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="8" Height="31" Width="156"/>
+                                            <TextBox x:Name="r_supplier"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="2" IsEnabled="False"/>
+                                            <TextBox x:Name="r_makercode"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="4" IsEnabled="False"/>
+                                            <TextBox x:Name="r_desc"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="6" IsEnabled="False"/>
+                                            <TextBox x:Name="r_comptype"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="8" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="1000">
+                        <materialDesign:PackIcon Kind="Chip" VerticalAlignment="Center" HorizontalAlignment="Left" Width="54" Height="48"/>
+                        <TextBlock TextWrapping="Wrap" Text="KANBAN EPSON" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,-48,0,0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem2" TabIndex="2" >
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1">
+                        <TabControl HorizontalAlignment="Left"  Margin="0" VerticalAlignment="Top" TabStripPlacement="Top" Height="605" Width="990">
+                            <TabItem Header="Parts Issuance" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="518" Margin="15,22,0,0" VerticalAlignment="Top" Width="478" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="84*"/>
+                                                <ColumnDefinition Width="80*"/>
+                                                <ColumnDefinition Width="163*"/>
+                                                <ColumnDefinition Width="149*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="59*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="DID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="1" Height="31" Width="111" Grid.ColumnSpan="2"/>
+                                            <Label Content="Ionics PN:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Plan Date:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="11" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Plan Quantity:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="9" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Line:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="5" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Label Content="Model:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Grid.Row="7" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Button x:Name="btn_issue" IsEnabled="False" Content="ISSUE" Grid.Column="2" HorizontalAlignment="Left" Margin="30,10,0,0" Grid.Row="12" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF5AB53F" Click="btn_issue_Click"/>
+                                            <Button x:Name="btn_reset_issue" Content="RESET" Grid.Column="3" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="12" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Click="btn_reset_issue_Click"/>
+                                            <TextBox x:Name="i_did"  Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" KeyDown="i_did_KeyDown"/>
+                                            <TextBox x:Name="i_ipn"  Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" KeyDown="i_ipn_KeyDown"/>
+                                            <TextBox x:Name="i_plan" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" PreviewTextInput="i_plan_PreviewTextInput"/>
+                                            <ComboBox x:Name="i_line" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="5" IsReadOnly="True" DropDownOpened="i_line_DropDownOpened"/>
+                                            <ComboBox x:Name="i_model" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="7" DropDownOpened="i_model_DropDownOpened"/>
+                                            <DatePicker Grid.Column="2" x:Name="i_date" HorizontalAlignment="Left" Margin="10,12,0,0" Grid.Row="11" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="281"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="#FF4F87FF" CornerRadius="10" BorderThickness="2" HorizontalAlignment="Left" Height="518" Margin="520,22,0,0" VerticalAlignment="Top" Width="447" Background="#FFF9F9F9">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="161*"/>
+                                                <ColumnDefinition Width="270*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="DID Details" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="156" FontSize="24"/>
+                                            <Label Content="Part Number:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="2" Height="31" Width="137"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="4" Height="31" Width="137"/>
+                                            <Label Content="Lot Number:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="8" Height="31" Width="156" Grid.ColumnSpan="2"/>
+                                            <Label Content="Quantity:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="10" Height="31" Width="156" Grid.ColumnSpan="2"/>
+                                            <Label Content="Registered By:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="12" Height="31" Width="156" Grid.ColumnSpan="2"/>
+                                            <Label Content="Status:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="14" Height="31" Width="156" Grid.ColumnSpan="2"/>
+                                            <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="16" Height="31" Width="156" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="i_pn"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="2" IsEnabled="False"/>
+                                            <TextBox x:Name="i_desc"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="4" IsEnabled="False"/>
+                                            <TextBox x:Name="i_lotnum"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="8" IsEnabled="False"/>
+                                            <TextBox x:Name="i_qty"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="10" IsEnabled="False"/>
+                                            <TextBox x:Name="i_pic"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="12" IsEnabled="False"/>
+                                            <TextBox x:Name="i_status"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="14" IsEnabled="False"/>
+                                            <TextBox x:Name="i_invonum"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="16" IsEnabled="False"/>
+                                            <Label Content="Supplier:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="6" Height="31" Width="137"/>
+                                            <TextBox x:Name="i_sup" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="11,2,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                            </TabItem>
+                            <TabItem Header="Parts Return" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="518" Margin="15,22,0,0" VerticalAlignment="Top" Width="478" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="84*"/>
+                                                <ColumnDefinition Width="80*"/>
+                                                <ColumnDefinition Width="163*"/>
+                                                <ColumnDefinition Width="149*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="59*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="DID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="1" Height="31" Width="111" Grid.ColumnSpan="2"/>
+                                            <Label Content="From Line:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="From Model:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="5" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="From Plan Date:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="9" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Label Content="From Plan Qty:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="7" Height="31" Width="144" Grid.ColumnSpan="2"/>
+                                            <Label Content="Return Quantity:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="11" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Label Content="Reason:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Grid.Row="13" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Button x:Name="btn_return" Click="btn_return_Click" Content="RETURN" Grid.Column="2" HorizontalAlignment="Left" Margin="33,11,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" Background="#FFFF9C4A" BorderBrush="#FFB5A53F" />
+                                            <Button x:Name="btn_reset_return" Click="btn_reset_return_Click" Content="RESET" Grid.Column="3" HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E"/>
+                                            <TextBox x:Name="re_did"  Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" KeyDown="re_did_KeyDown"/>
+                                            <TextBox x:Name="re_line" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="re_model" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="re_date" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="re_plan" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <ComboBox x:Name="re_reason" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="13" DropDownOpened="re_reason_DropDownOpened"/>
+                                            <TextBox x:Name="re_return_qty" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="11" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" PreviewTextInput="re_return_qty_PreviewTextInput"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="#FF4F87FF" BorderThickness="2" CornerRadius="10"  HorizontalAlignment="Left" Height="518" Margin="520,22,0,0" VerticalAlignment="Top" Width="447" Background="#FFF9F9F9">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="161*"/>
+                                                <ColumnDefinition Width="270*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="DID Details" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="156" FontSize="24"/>
+                                            <Label Content="Part Number:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="2" Height="31" Width="137"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="4" Height="31" Width="137"/>
+                                            <Label Content="Lot Number:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Grid.Row="6" Height="31" Width="156" Grid.ColumnSpan="2"/>
+                                            <Label Content="Quantity:" HorizontalAlignment="Left" Margin="9,6,0,0" VerticalAlignment="Top" Grid.Row="10" Height="31" Width="156"/>
+                                            <Label Content="Registered By:" HorizontalAlignment="Left" Margin="9,6,0,0" VerticalAlignment="Top" Grid.Row="12" Height="31" Width="156"/>
+                                            <Label Content="Status:" HorizontalAlignment="Left" Margin="9,6,0,0" VerticalAlignment="Top" Grid.Row="14" Height="31" Width="156"/>
+                                            <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="9,6,0,0" VerticalAlignment="Top" Grid.Row="16" Height="31" Width="156"/>
+                                            <TextBox x:Name="re_pn"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="2" IsEnabled="False"/>
+                                            <TextBox x:Name="re_desc"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="4" IsEnabled="False"/>
+                                            <TextBox x:Name="re_lotnum"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="6" IsEnabled="False"/>
+                                            <TextBox x:Name="re_qty"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="10" IsEnabled="False"/>
+                                            <TextBox x:Name="re_pic"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="12" IsEnabled="False"/>
+                                            <TextBox x:Name="re_status"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="14" IsEnabled="False"/>
+                                            <TextBox x:Name="re_invonum"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="16" IsEnabled="False"/>
+                                            <Label Content="Supplier:" HorizontalAlignment="Left" Margin="9,6,0,0" VerticalAlignment="Top" Grid.Row="8" Height="31" Width="156"/>
+                                            <TextBox x:Name="re_sup"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="8" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                            </TabItem>
+                            <TabItem Header="DID Inquiry" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="130" Margin="15,22,0,0" VerticalAlignment="Top" Width="478" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                                <ColumnDefinition Width="184*"/>
+                                                <ColumnDefinition Width="159*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="9*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="8*"/>
+                                                <RowDefinition Height="61*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="DID:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="1"/>
+                                            <TextBox x:Name="s_did" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+                                            <Button x:Name="btn_search" Click="btn_search_Click" Content="SEARCH" Grid.Column="2" HorizontalAlignment="Left" Margin="29,5,0,0" Grid.Row="3" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="#FF4F87FF" BorderThickness="2" CornerRadius="10"  HorizontalAlignment="Left" Height="518" Margin="520,22,0,0" VerticalAlignment="Top" Width="447" Background="#FFF9F9F9">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="193*"/>
+                                                <ColumnDefinition Width="250*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="DID Details" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="156" FontSize="24" Grid.RowSpan="2"/>
+                                            <Label Content="Part Number:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="4" Height="31" Width="137"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="6" Height="31" Width="137"/>
+                                            <Label Content="Lot Number:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="8" Height="31" Width="156"/>
+                                            <Label Content="Original Quantity:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="12" Height="31" Width="174"/>
+                                            <Label Content="Registered By:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="16" Height="31" Width="156"/>
+                                            <Label Content="Status:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="18" Height="31" Width="156"/>
+                                            <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="20" Height="31" Width="156"/>
+                                            <TextBox x:Name="d_pn"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,0.212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="4" IsEnabled="False"/>
+                                            <TextBox x:Name="d_desc"  Grid.Column="1" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="6" IsEnabled="False" Margin="10,0.424,0,0"/>
+                                            <TextBox x:Name="d_lotnum"  Grid.Column="1" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="8" IsEnabled="False" Margin="10,0.424,0,0"/>
+                                            <TextBox x:Name="d_qty" HorizontalAlignment="Left" Height="37" Margin="9,0.424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="12" IsEnabled="False" Grid.Column="1"/>
+                                            <TextBox x:Name="d_pic" HorizontalAlignment="Left" Height="37" Margin="9,0.424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="16" IsEnabled="False" Grid.Column="1"/>
+                                            <TextBox x:Name="d_status" HorizontalAlignment="Left" Height="37" Margin="9,1.424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="18" IsEnabled="False" Grid.Column="1"/>
+                                            <TextBox x:Name="d_invonum" HorizontalAlignment="Left" Height="37" Margin="9,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="20" IsEnabled="False" Grid.Column="1"/>
+                                            <Label Content="Supplier:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="10" Height="31" Width="156"/>
+                                            <TextBox x:Name="d_sup" HorizontalAlignment="Left" Height="37" Margin="9,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="10" IsEnabled="False" Grid.Column="1"/>
+                                            <Label Content="Remaining Quantity:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="14" Height="31" Width="180"/>
+                                            <TextBox x:Name="d_remaining_qty"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="14" IsEnabled="False"/>
+                                            <Label Content="DID:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="2" Height="31" Width="137"/>
+                                            <TextBox x:Name="d_scan_did"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,0.212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="2" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Grid HorizontalAlignment="Left" Height="383" Margin="15,157,0,0" VerticalAlignment="Top" Width="476">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="37*"/>
+                                            <RowDefinition Height="320*"/>
+                                        </Grid.RowDefinitions>
+                                        <Border BorderBrush="Transparent" Background="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="383" VerticalAlignment="Top" Width="476" Grid.RowSpan="2">
+                                            <Label Content="DID Transactions" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="235" FontSize="24" Margin="5,-2,0,0"/>
+                                        </Border>
+                                        <DataGrid x:Name="did_transaction_grid" HorizontalAlignment="Left" Height="333" VerticalAlignment="Top" Width="476" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+
+                            </TabItem>
+                        </TabControl>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="1000">
+                        <materialDesign:PackIcon Kind="Chip" VerticalAlignment="Center" HorizontalAlignment="Left" Width="54" Height="48"/>
+                        <TextBlock TextWrapping="Wrap" Text="KANBAN EPSON" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,-48,0,0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="TabItem3" TabIndex="3">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel  Grid.Row="1">
+                        <TabControl HorizontalAlignment="Left"  Margin="0,0,0,0" VerticalAlignment="Top" TabStripPlacement="Top" Height="605" Width="990">
+                            <TabItem Header="Material Details" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="509" Margin="15,26,0,0" VerticalAlignment="Top" Width="435" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="145*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="65*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Customer PN:" HorizontalAlignment="Left" Margin="4,11,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="1"/>
+                                            <TextBox x:Name="m_cpn" HorizontalAlignment="Right" Height="37" Margin="0,7,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
+                                            <Button x:Name="btn_save_m" Click="btn_save_m_Click" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="38,11,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F"/>
+                                            <Button x:Name="btn_reset_save_m" Click="btn_reset_save_m_Click" Content="RESET" Grid.Column="2" HorizontalAlignment="Left" Margin="22,10,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E"/>
+                                            <Label Content="Input Fields:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="40" Width="273" Grid.ColumnSpan="2" Foreground="#DD1068E8" FontSize="22"/>
+                                            <Label Content="Ionics PN:" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="3"/>
+                                            <TextBox x:Name="m_ipn" HorizontalAlignment="Right" Height="37" Margin="0,7,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                                            <Label Content="Maker:" HorizontalAlignment="Left" Margin="5,12,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="5"/>
+                                            <TextBox x:Name="m_maker" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Maker Code:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Height="31" Width="121" Grid.Row="7"/>
+                                            <TextBox x:Name="m_maker_code" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Height="31" Width="128" Grid.Row="9"/>
+                                            <TextBox x:Name="m_desc" HorizontalAlignment="Right" Height="37" Margin="0,7,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="9" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Remarks:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="13"/>
+                                            <TextBox x:Name="m_remarks" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="13" Grid.Column="1" IsEnabled="False"/>
+                                            <Button x:Name="btn_add_m" Click="btn_add_m_Click" Content="ADD" HorizontalAlignment="Left" Margin="13,11,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF"/>
+                                            <Label Content="Type:" HorizontalAlignment="Left" Margin="5,12,0,0" VerticalAlignment="Top" Height="31" Width="164" Grid.Row="11" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="m_comp_type" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="11" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="509" Margin="469,24,0,0" VerticalAlignment="Top" Width="499" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="53*"/>
+                                                <RowDefinition Height="444*"/>
+                                                <RowDefinition Height="10*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Material Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="161"/>
+                                            <DataGrid x:Name="grid_material" IsReadOnly="True" CanUserAddRows="False" SelectionMode="Extended"  HorizontalAlignment="Left" Height="444" Margin="10,0,0,0" VerticalAlignment="Top" Width="477" Grid.Row="1" MouseDoubleClick="grid_material_MouseDoubleClick"/>
+                                            <Label Content="Note: Doble left click row to edit." HorizontalAlignment="Left" Margin="176,14,0,0" VerticalAlignment="Top" Height="31" Width="264" FontSize="14" FontStyle="Italic" Foreground="#DDF00D0D"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                            </TabItem>
+                            <TabItem Header="User Credential" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                            </TabItem>
+                        </TabControl>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="1000">
+                        <materialDesign:PackIcon Kind="Chip" VerticalAlignment="Center" HorizontalAlignment="Left" Width="54" Height="48"/>
+                        <TextBlock TextWrapping="Wrap" Text="KANBAN EPSON" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,-48,0,0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

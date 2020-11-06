@@ -1,0 +1,84 @@
+﻿<Window x:Class="CMS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CMS"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Component Monitoring System" Height="428" Width="356" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Border CornerRadius="10">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFBDBDFF" Offset="1"/>
+                <GradientStop Color="#FF060624"/>
+                <GradientStop Color="#FF4C4C78"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="393*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="78*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel  Margin="61,84,11,45" Grid.Row="1">
+
+                <Label Content="Login Form" HorizontalAlignment="Left" Margin="20,10,0,10" VerticalAlignment="Top" FontFamily="Segoe UI Black" FontSize="24" RenderTransformOrigin="0.387,0.175" Foreground="#DDFFFEFE"/>
+
+                <StackPanel Margin="0,15" Orientation="Horizontal" Height="31">
+                    <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+                    <TextBox x:Name="txt_emp" materialDesign:HintAssist.Hint="Employee Code" Width="200" Margin="5,4,5,1" Foreground="White" KeyDown="txt_emp_KeyDown"/>
+                </StackPanel>
+                <StackPanel Margin="0,15" Orientation="Horizontal" Height="31" RenderTransformOrigin="0.517,1.258">
+                    <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+                    <PasswordBox x:Name="txt_pass" materialDesign:HintAssist.Hint="Password" Width="200" Margin="5,4,5,1" Foreground="White" KeyDown="txt_pass_KeyDown"  />
+                </StackPanel>
+                <StackPanel Margin="15,15" Orientation="Horizontal" Height="50">
+                    <Button x:Name="btnlogin" Content="Login" Margin="60,0,0,0" Width="95" Click="btnlogin_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+            <Image HorizontalAlignment="Left" Height="100" Margin="85,24,0,0" VerticalAlignment="Top" Width="170" Source="ezgif.com-gif-maker.png" Grid.RowSpan="2"/>
+
+
+            <materialDesign:DialogHost DialogClosing="DialogHost_DialogClosing" Style="{StaticResource MaterialDesignEmbeddedDialogHost}" DialogMargin="20" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="20">
+                        <TextBlock>Gonna close me?</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>True</system:Boolean>
+                                </Button.CommandParameter>
+                                YES
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>False</system:Boolean>
+                                </Button.CommandParameter>
+                                NO
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Button x:Name="btnclose"  Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Close" Margin="323,2,2,396" Height="Auto" Width="Auto">
+                    <materialDesign:PackIcon Kind="Power" />
+                </Button>
+            </materialDesign:DialogHost>
+
+
+        </Grid>
+    </Border>
+
+
+</Window>
