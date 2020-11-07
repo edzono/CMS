@@ -218,9 +218,92 @@
                         <RowDefinition Height="65"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="1000">
+                    <StackPanel HorizontalAlignment="Left" Height="49" Margin="10,10,-77,0" VerticalAlignment="Top" Width="1000">
                         <materialDesign:PackIcon Kind="Chip" VerticalAlignment="Center" HorizontalAlignment="Left" Width="54" Height="48"/>
                         <TextBlock TextWrapping="Wrap" Text="KANBAN EPSON" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,-48,0,0" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <TabControl HorizontalAlignment="Left"  Margin="0" VerticalAlignment="Top" TabStripPlacement="Top" Height="605" Width="990">
+                            <TabItem Header="Overall Inventory" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="563" VerticalAlignment="Top"  Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="493" Margin="15,39,0,0" VerticalAlignment="Top" Width="478" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="84*"/>
+                                                <ColumnDefinition Width="80*"/>
+                                                <ColumnDefinition Width="163*"/>
+                                                <ColumnDefinition Width="149*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="59*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Ionics PN:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="111" Grid.ColumnSpan="2"/>
+                                            <!-- <Label Content="Customer PN:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            =-->
+                                            <Label Content="DID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="1" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Lot Number:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="5" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Quantity:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="7" Height="31" Width="137" Grid.ColumnSpan="2"/>
+                                            <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="9" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <Button x:Name="btn_asdreg" Click="btn_reg_Click" Content="REGISTER" Grid.Column="2" HorizontalAlignment="Left" Margin="31,13,0,0" Grid.Row="12" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF5AB53F" Grid.RowSpan="2"/>
+                                            <Button x:Name="btn_rasdeset_reg" Click="btn_reset_reg_Click" Content="RESET" Grid.Column="3" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="12" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Grid.RowSpan="2"/>
+                                            <TextBox x:Name="r_iasdpn" KeyDown="r_ipn_KeyDown"  Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <!--      <TextBox x:Name="r_cpn" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                       =-->
+                                            <TextBox x:Name="r_dasdid" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,6,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2" KeyDown="r_did_KeyDown"/>
+                                            <TextBox x:Name="r_loasdtnum" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="r_qtyasd" KeyDown="r_qty_KeyDown" PreviewTextInput="r_qty_PreviewTextInput" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="r_invadonum" KeyDown="r_invonum_KeyDown" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+                                            <Label Content="Remarks:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Row="11" Height="31" Width="148" Grid.ColumnSpan="2"/>
+                                            <TextBox x:Name="r_rasdemarks" Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="10,5,0,0" Grid.Row="11" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" Grid.ColumnSpan="2"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="#FF4F87FF" CornerRadius="10" BorderThickness="2" HorizontalAlignment="Left" Height="370" Margin="520,99,0,0" VerticalAlignment="Top" Width="447" Background="#FFF9F9F9">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="161*"/>
+                                                <ColumnDefinition Width="270*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="15*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="30*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Parts Details" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="156" FontSize="24"/>
+                                            <Label Content="Supplier:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="31" Width="137"/>
+                                            <Label Content="Maker Code:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="31" Width="137"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="6" Height="31" Width="137"/>
+                                            <Label Content="Component type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="8" Height="31" Width="156"/>
+                                            <TextBox x:Name="r_supasdplier"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="2" IsEnabled="False"/>
+                                            <TextBox x:Name="r_maasdkercode"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="4" IsEnabled="False"/>
+                                            <TextBox x:Name="r_deasdsc"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="6" IsEnabled="False"/>
+                                            <TextBox x:Name="r_coasdmptype"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.Row="8" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                          </TabItem>
+                            <TabItem Header="Individual Inventory" FontWeight="Bold" FontSize="18" />
+                        </TabControl>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -608,7 +691,6 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-
             <TabItem Header="TabItem3" TabIndex="3">
                 <Grid >
                     <Grid.RowDefinitions>
@@ -641,26 +723,30 @@
                                                 <RowDefinition Height="50*"/>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
                                                 <RowDefinition Height="65*"/>
                                             </Grid.RowDefinitions>
-                                            <Label Content="Customer PN:" HorizontalAlignment="Left" Margin="4,11,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="1"/>
-                                            <TextBox x:Name="m_cpn" HorizontalAlignment="Right" Height="37" Margin="0,7,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
-                                            <Button x:Name="btn_save_m" Click="btn_save_m_Click" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="38,11,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F"/>
-                                            <Button x:Name="btn_reset_save_m" Click="btn_reset_save_m_Click" Content="RESET" Grid.Column="2" HorizontalAlignment="Left" Margin="22,10,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E"/>
+                                            <Label Content="Customer PN:" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="3"/>
+                                            <TextBox x:Name="m_cpn" HorizontalAlignment="Right" Height="37" Margin="0,1,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                                            <Button x:Name="btn_save_m" Click="btn_save_m_Click" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="34,6,0,0" Grid.Row="16" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F"/>
+                                            <Button x:Name="btn_reset_save_m" Click="btn_reset_save_m_Click" Content="RESET" Grid.Column="2" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="16" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E"/>
                                             <Label Content="Input Fields:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="40" Width="273" Grid.ColumnSpan="2" Foreground="#DD1068E8" FontSize="22"/>
-                                            <Label Content="Ionics PN:" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="3"/>
-                                            <TextBox x:Name="m_ipn" HorizontalAlignment="Right" Height="37" Margin="0,7,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
-                                            <Label Content="Maker:" HorizontalAlignment="Left" Margin="5,12,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="5"/>
-                                            <TextBox x:Name="m_maker" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" FontSize="14" IsEnabled="False"/>
-                                            <Label Content="Maker Code:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Height="31" Width="121" Grid.Row="7"/>
-                                            <TextBox x:Name="m_maker_code" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" FontSize="14" IsEnabled="False"/>
-                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Height="31" Width="128" Grid.Row="9"/>
-                                            <TextBox x:Name="m_desc" HorizontalAlignment="Right" Height="37" Margin="0,7,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="9" Grid.Column="1" FontSize="14" IsEnabled="False"/>
-                                            <Label Content="Remarks:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="13"/>
-                                            <TextBox x:Name="m_remarks" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="13" Grid.Column="1" IsEnabled="False"/>
-                                            <Button x:Name="btn_add_m" Click="btn_add_m_Click" Content="ADD" HorizontalAlignment="Left" Margin="13,11,0,0" Grid.Row="14" VerticalAlignment="Top" Width="105" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF"/>
-                                            <Label Content="Type:" HorizontalAlignment="Left" Margin="5,12,0,0" VerticalAlignment="Top" Height="31" Width="164" Grid.Row="11" Grid.ColumnSpan="2"/>
-                                            <TextBox x:Name="m_comp_type" HorizontalAlignment="Right" Height="37" Margin="0,6,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="11" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Ionics PN:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="5"/>
+                                            <TextBox x:Name="m_ipn" HorizontalAlignment="Right" Height="37" Margin="0,1,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                                            <Label Content="Maker:" HorizontalAlignment="Left" Margin="5,7,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="7"/>
+                                            <TextBox x:Name="m_maker" HorizontalAlignment="Right" Height="37" Margin="0,1,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Maker Code:" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top" Height="31" Width="121" Grid.Row="9"/>
+                                            <TextBox x:Name="m_maker_code" HorizontalAlignment="Right" Height="37" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="9" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Description:" HorizontalAlignment="Left" Margin="5,6,0,0" VerticalAlignment="Top" Height="31" Width="128" Grid.Row="11"/>
+                                            <TextBox x:Name="m_desc" HorizontalAlignment="Right" Height="37" Margin="0,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="11" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="Remarks:" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="15"/>
+                                            <TextBox x:Name="m_remarks" HorizontalAlignment="Right" Height="37" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="15" Grid.Column="1" IsEnabled="False"/>
+                                            <Button x:Name="btn_add_m" Click="btn_add_m_Click" Content="ADD" HorizontalAlignment="Left" Margin="19,6,0,0" Grid.Row="16" VerticalAlignment="Top" Width="105" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF"/>
+                                            <Label Content="Type:" HorizontalAlignment="Left" Margin="5,6,0,0" VerticalAlignment="Top" Height="31" Width="128" Grid.Row="13"/>
+                                            <TextBox x:Name="m_comp_type" HorizontalAlignment="Right" Height="37" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="13" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                                            <Label Content="ID:" HorizontalAlignment="Left" Margin="4,9,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="1"/>
+                                            <TextBox x:Name="m_ID" HorizontalAlignment="Right" Height="37" Margin="0,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
 
                                         </Grid>
                                     </Border>
@@ -683,8 +769,234 @@
                                 </Grid>
 
                             </TabItem>
-                            <TabItem Header="User Credential" FontWeight="Bold" FontSize="18">
-                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                            <TabItem Header="Model Details" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="263" Margin="15,26,0,0" VerticalAlignment="Top" Width="435" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="145*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="65*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Family Name:" HorizontalAlignment="Left" Margin="8,4,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="3"/>
+                                            <TextBox x:Name="model_fam" HorizontalAlignment="Right" Height="37" Margin="0,0,9,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" IsEnabled="False"/>
+                                            <Label Content="Input Fields:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="40" Width="273" Grid.ColumnSpan="2" Foreground="#DD1068E8" FontSize="22"/>
+                                            <Label Content="Model:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="5"/>
+                                            <TextBox x:Name="model_model" HorizontalAlignment="Right" Height="37" Margin="0,0,9,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                                            <Button x:Name="btn_save_model" Click="btn_save_model_Click" Content="SAVE" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F" Grid.Column="1" Grid.Row="6"/>
+                                            <Button x:Name="btn_reset_save_model" Click="btn_reset_save_model_Click" Content="RESET" HorizontalAlignment="Left" Margin="21,9,0,0" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Grid.Column="2" Grid.Row="6"/>
+                                            <Button x:Name="btn_add_model" Click="btn_add_model_Click" Content="ADD" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="105" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF" Grid.Row="6"/>
+                                            <Label Content="ID:" HorizontalAlignment="Left" Margin="8,4,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="1"/>
+                                            <TextBox x:Name="model_ID" HorizontalAlignment="Right" Height="37" Margin="0,0,9,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="509" Margin="469,24,0,0" VerticalAlignment="Top" Width="499" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="53*"/>
+                                                <RowDefinition Height="444*"/>
+                                                <RowDefinition Height="10*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Model Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="161"/>
+                                            <DataGrid x:Name="grid_model" IsReadOnly="True" CanUserAddRows="False" SelectionMode="Extended"  HorizontalAlignment="Left" Height="444" Margin="10,0,0,0" VerticalAlignment="Top" Width="477" Grid.Row="1" MouseDoubleClick="grid_model_MouseDoubleClick"/>
+                                            <Label Content="Note: Doble left click row to edit." HorizontalAlignment="Left" Margin="176,14,0,0" VerticalAlignment="Top" Height="31" Width="264" FontSize="14" FontStyle="Italic" Foreground="#DDF00D0D"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Line Details" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="328" Margin="15,26,0,0" VerticalAlignment="Top" Width="435" Background="#FFF7F7F7">
+                                        <Grid Margin="0,0,-1,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="145*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="65*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Family Name:" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="3"/>
+                                            <Label Content="Input Fields:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="40" Width="273" Grid.ColumnSpan="2" Foreground="#DD1068E8" FontSize="22"/>
+                                            <Label Content="Model:" HorizontalAlignment="Left" Margin="11,9,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="5"/>
+                                            <Label Content="Line:" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="7"/>
+                                            <TextBox x:Name="line_line" HorizontalAlignment="Right" Height="37" Margin="0,4,11,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" IsEnabled="False"/>
+                                            <ComboBox x:Name="line_family" IsEnabled="False" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Width="268" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3"  DropDownOpened="line_family_DropDownOpened" IsEditable="True"/>
+                                            <ComboBox x:Name="line_model" IsEnabled="False" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Width="268" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5"  DropDownOpened="line_model_DropDownOpened" IsEditable="True"/>
+                                            <Button x:Name="btn_save_line" Click="btn_save_line_Click" Content="SAVE" HorizontalAlignment="Left" Margin="38,11,0,0" VerticalAlignment="Top" Width="104" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F" Grid.Column="1" Grid.Row="8"/>
+                                            <Button x:Name="btn_reset_save_line" Click="btn_reset_save_line_Click" Content="RESET" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" Width="104" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Grid.Column="2" Grid.Row="8"/>
+                                            <Button x:Name="btn_add_line" Click="btn_add_line_Click" Content="ADD" HorizontalAlignment="Left" Margin="12,11,0,0" VerticalAlignment="Top" Width="106" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF" Grid.Row="8"/>
+                                            <Label Content="ID:" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="1"/>
+                                            <TextBox x:Name="line_ID" IsEnabled="False" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="268" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" IsReadOnly="True" />
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="509" Margin="469,24,0,0" VerticalAlignment="Top" Width="499" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="53*"/>
+                                                <RowDefinition Height="444*"/>
+                                                <RowDefinition Height="10*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Line Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="161"/>
+                                            <DataGrid x:Name="grid_line" IsReadOnly="True" CanUserAddRows="False" SelectionMode="Extended"  HorizontalAlignment="Left" Height="444" Margin="10,0,0,0" VerticalAlignment="Top" Width="477" Grid.Row="1" MouseDoubleClick="grid_line_MouseDoubleClick"/>
+                                            <Label Content="Note: Doble left click row to edit." HorizontalAlignment="Left" Margin="176,14,0,0" VerticalAlignment="Top" Height="31" Width="264" FontSize="14" FontStyle="Italic" Foreground="#DDF00D0D"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Rack Details" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="330" Margin="15,26,0,0" VerticalAlignment="Top" Width="431" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="144*"/>
+                                                <ColumnDefinition Width="145*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="65*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Part Number:" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Height="31" Width="126" Grid.Row="3"/>
+                                            <Label Content="Input Fields:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="40" Width="273" Grid.ColumnSpan="2" Foreground="#DD1068E8" FontSize="22"/>
+                                            <Label Content="Rack:" HorizontalAlignment="Left" Margin="11,8,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="5"/>
+                                            <Label Content="Slot:" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="7"/>
+                                            <TextBox x:Name="rack_slot" HorizontalAlignment="Right" Height="37" Margin="0,3,11,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" IsEnabled="False"/>
+                                            <ComboBox x:Name="rack_pn" IsEnabled="False" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="268" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" DropDownOpened="line_family_DropDownOpened" IsEditable="True"/>
+                                            <TextBox x:Name="rack_rack" HorizontalAlignment="Right" Height="37" Margin="0,7,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
+                                            <Button x:Name="btn_save_rack" Click="btn_save_rack_Click" Content="SAVE" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F" Grid.Column="1" Grid.Row="8"/>
+                                            <Button x:Name="btn_reset_save_rack" Click="btn_reset_save_rack_Click" Content="RESET" HorizontalAlignment="Left" Margin="21,11,0,0" VerticalAlignment="Top" Width="105" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Grid.Column="2" Grid.Row="8"/>
+                                            <Button x:Name="btn_add_rack" Click="btn_add_rack_Click" Content="ADD" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="105" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF" Grid.Row="8"/>
+                                            <Label Content="ID:" HorizontalAlignment="Left" Margin="14,8,0,0" VerticalAlignment="Top" Height="31" Width="97" Grid.Row="1"/>
+                                            <TextBox x:Name="rack_ID" HorizontalAlignment="Right" Height="37" Margin="0,1,7,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="509" Margin="469,24,0,0" VerticalAlignment="Top" Width="499" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="53*"/>
+                                                <RowDefinition Height="444*"/>
+                                                <RowDefinition Height="10*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Rack Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="161"/>
+                                            <DataGrid x:Name="grid_rack" IsReadOnly="True" CanUserAddRows="False" SelectionMode="Extended"  HorizontalAlignment="Left" Height="444" Margin="10,0,0,0" VerticalAlignment="Top" Width="477" Grid.Row="1" MouseDoubleClick="grid_rack_MouseDoubleClick"/>
+                                            <Label Content="Note: Doble left click row to edit." HorizontalAlignment="Left" Margin="176,14,0,0" VerticalAlignment="Top" Height="31" Width="264" FontSize="14" FontStyle="Italic" Foreground="#DDF00D0D"/>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Account Control" FontWeight="Bold" FontSize="18">
+                                <Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="374" Margin="15,159,0,0" VerticalAlignment="Top" Width="494" Background="#FFF7F7F7">
+                                        <Grid x:Name="acc_grid"  IsEnabled="False">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="215*"/>
+                                                <ColumnDefinition Width="130*"/>
+                                                <ColumnDefinition Width="147*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="50*"/>
+                                                <RowDefinition Height="65*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="EMPLOYEE CODE:" HorizontalAlignment="Left" Margin="6,8,0,0" VerticalAlignment="Top" Height="31" Width="163" Grid.Row="3"/>
+                                            <Label Content="Input Fields:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="40" Width="273" Grid.ColumnSpan="2" Foreground="#DD1068E8" FontSize="22"/>
+                                            <Label Content="PASSWORD:" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top" Height="31" Width="115" Grid.Row="7"/>
+                                            <Label Content="CONFIRM PASSWORD:" HorizontalAlignment="Left" Margin="8,11,0,0" VerticalAlignment="Top" Height="31" Width="202" Grid.Row="9"/>
+                                            <TextBox x:Name="acc_cpass" HorizontalAlignment="Right" Height="37" Margin="0,5,7,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="9"  Grid.Column="1"/>
+                                            <TextBox x:Name="acc_pass" HorizontalAlignment="Right" Height="37" Margin="0,7,8,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1"/>
+                                            <Label Content="USER TYPE:" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top" Height="31" Width="115" Grid.Row="1"/>
+                                            <ComboBox x:Name="acc_type" HorizontalAlignment="Right" VerticalAlignment="Top" Width="268" DropDownOpened="line_model_DropDownOpened" Grid.ColumnSpan="2" Margin="0,7,7,0" Grid.Row="1" Grid.Column="1" Height="36" IsEditable="True">
+                                                <ComboBoxItem Content="ADMINISTRATOR"/>
+                                                <ComboBoxItem Content="USER" />
+                                            </ComboBox>
+                                            <TextBox x:Name="acc_emp_code" HorizontalAlignment="Right" Height="37" Margin="0,6,7,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1"/>
+                                            <Button x:Name="btn_save_acc" Click="btn_save_acc_Click" Content="SAVE" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="104" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F" Grid.Column="1" Grid.Row="10"/>
+                                            <Button x:Name="btn_reset_save_acc" Click="btn_reset_save_acc_Click" Content="RESET" HorizontalAlignment="Left" Margin="20,9,0,0" VerticalAlignment="Top" Width="106" Height="39" BorderBrush="#FFFF1232" Background="#FFF7344E" Grid.Column="2" Grid.Row="10"/>
+                                            <Label Content="EMPLOYEE NAME:" HorizontalAlignment="Left" Margin="6,9,0,0" VerticalAlignment="Top" Height="31" Width="163" Grid.Row="5"/>
+                                            <TextBox x:Name="acc_emp_name" HorizontalAlignment="Right" Height="37" Margin="0,7,7,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="509" Margin="529,24,0,0" VerticalAlignment="Top" Width="439" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="53*"/>
+                                                <RowDefinition Height="444*"/>
+                                                <RowDefinition Height="10*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Account List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="161"/>
+                                            <DataGrid x:Name="grid_acc" IsReadOnly="True" CanUserAddRows="False" SelectionMode="Extended"  HorizontalAlignment="Left" Height="444" Margin="10,0,0,0" VerticalAlignment="Top" Width="417" Grid.Row="1" MouseDoubleClick="grid_acc_MouseDoubleClick"/>
+                                            <Label Content="Note: Doble left click row to edit." HorizontalAlignment="Left" Margin="176,14,0,0" VerticalAlignment="Top" Height="31" Width="264" FontSize="14" FontStyle="Italic" Foreground="#DDF00D0D"/>
+
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="114" Margin="15,26,0,0" VerticalAlignment="Top" Width="494" Background="#FFF7F7F7">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="133*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0*"/>
+                                                <RowDefinition Height="55*"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Button x:Name="btn_CP" Click="btn_CP_Click" Content="CHANGE PASSWORD" HorizontalAlignment="Left" Margin="159,61,0,0" VerticalAlignment="Top" Width="172" Height="39" Background="Yellow" BorderBrush="Yellow" Grid.Row="1" Foreground="#DD0E0E0E"/>
+                                            <Button x:Name="btn_ANU" Click="btn_ANU_Click" Content="ADD NEW USER" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="155" Height="39" Background="#FF24AFFF" BorderBrush="#FF24AFFF" Grid.Row="1"/>
+                                            <Button x:Name="btn_ENU" Click="btn_ENU_Click" Content="EDIT USER" HorizontalAlignment="Left" Margin="327,12,0,0" VerticalAlignment="Top" Width="155" Height="39" Background="#FFFFBD0D" BorderBrush="#FFFFBD0D" Grid.Row="1"/>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
                             </TabItem>
                         </TabControl>
                     </StackPanel>

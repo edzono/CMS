@@ -17,6 +17,8 @@ namespace CMS
     {
         public MySqlConnection conn;
         private int Total_Receive, Total_Stocks,Total_Return;
+        private int acc_id,m_id,model_id,rack_id,line_id;
+        private string Stats ="";
         public Menu()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace CMS
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
             ClearTextbox_Receive();
-            Disable_M_Input_Details();
+            CALL_CLEARTEXTBOX_AND_DISABLE()
         }
 
         private void register_Click(object sender, RoutedEventArgs e)
@@ -45,7 +47,7 @@ namespace CMS
             ClearTextbox_Issue();
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
-            Disable_M_Input_Details();
+            CALL_CLEARTEXTBOX_AND_DISABLE()
         }
 
         private void transact_Click(object sender, RoutedEventArgs e)
@@ -55,13 +57,14 @@ namespace CMS
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
             ClearTextbox_Receive();
-            Disable_M_Input_Details();
+            CALL_CLEARTEXTBOX_AND_DISABLE()
         }
 
         private void manage_Click(object sender, RoutedEventArgs e)
         {
             tabs.SelectedIndex = 3;
-            Load_Material_Details();
+            CALL_LOAD_MAINTENANCE();
+            CALL_CLEARTEXTBOX_AND_DISABLE()
             ClearTextbox_Issue();
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
@@ -439,18 +442,19 @@ namespace CMS
               
         private void re_reason_DropDownOpened(object sender, System.EventArgs e)
         {
-            string[] LineString;
             MySqlCommand cmd = new MySqlCommand
             {
                 Connection = conn,
-                CommandText = "select `value` from `ionics_settings` where `name` = 'reason'"
+                CommandText = "select distinct `reason` from `ionics_reason`"
             };
-            LineString = cmd.ExecuteScalar().ToString().Split(',');
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
             re_reason.Items.Clear();
 
-            for (int i = 0; i < LineString.Length - 1; i++)
+            foreach (DataRow dr in dt.Rows)
             {
-                re_reason.Items.Add(LineString[i]);
+                re_reason.Items.Add(dr[0].ToString());
             }
         }
 
@@ -574,6 +578,103 @@ namespace CMS
 
         #region parts maintenance
 
+        private void CALL_LOAD_MAINTENANCE()
+        {
+            Load_Material_Details();
+            Load_Account_List();
+            Load_Model_Details();
+            Load_Line_Details();
+            Load_Rack_Details();
+        }
+
+        private void CALL_CLEARTEXTBOX_AND_DISABLE()
+        {
+            ClearTextbox_Account();
+            ClearTextbox_Line();
+            ClearTextbox_Material();
+            ClearTextbox_Model();
+            ClearTextbox_Rack();
+
+            Disable_Account_Input_Details();
+            Disable_Line_Input_Details();
+            Disable_Model_Input_Details();
+            Disable_M_Input_Details();
+            Disable_Rack_Input_Details();
+        }
+
+
+        //Load Grid View
+        private void Load_Material_Details()
+        {
+            grid_material.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT id as 'ID',ionics_partnumber as 'IONICS PN',customer_partnumber as 'CUSTOMER PN',maker as 'MAKER',maker_code as 'MAKER CODE',description as 'DESCRIPTION',component_type as 'COMPONENT TYPE',remarks as 'REMARKS' FROM ionics_material_details";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            grid_material.ItemsSource = dt.DefaultView;
+        }
+
+        private void Load_Model_Details()
+        {
+            grid_model.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT id as 'ID',petname as 'FAMILY NAME',model as 'MODEL' FROM ionics_model";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            grid_model.ItemsSource = dt.DefaultView;
+        }
+
+        private void Load_Account_List()
+        {
+            grid_acc.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT id as 'ID',user_id as 'EMPLOYEE CODE',user_name as 'EMPLOYEE NAME',user_type as 'USER TYPE' FROM ionics_user";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            grid_acc.ItemsSource = dt.DefaultView;
+        }
+
+        private void Load_Line_Details()
+        {
+            grid_line.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT a.id as 'ID', a.line as 'LINE' , b.petname as 'FAMILY NAME', b.model as 'MODEL' FROM ionics_line a LEFT JOIN ionics_model b on a.model_id = b.id";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            grid_line.ItemsSource = dt.DefaultView;
+        }
+
+        private void Load_Rack_Details()
+        {
+            grid_rack.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT id as 'ID', rack as 'RACK',location as 'SLOT' , partnumber as 'PART NUMBER' FROM ionics_rack";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            grid_rack.ItemsSource = dt.DefaultView;
+        }
+
+        // Mouse Double Click in  DATA GRID
         private void grid_material_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
@@ -587,14 +688,15 @@ namespace CMS
                         DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
                         DataRowView dr = (DataRowView)dgr.Item;
 
-                     
-                        m_cpn.Text = dr[1].ToString();
-                        m_ipn.Text = dr[0].ToString();
-                        m_maker.Text = dr[2].ToString();
-                        m_maker_code.Text = dr[3].ToString();
-                        m_desc.Text = dr[4].ToString();
-                        m_comp_type.Text = dr[5].ToString();
-                        m_remarks.Text = dr[6].ToString();
+                        m_id = Convert.ToInt32(dr[0]);
+                        m_ID.Text = m_id.ToString();
+                        m_ipn.Text = dr[1].ToString();
+                        m_cpn.Text = dr[2].ToString();                       
+                        m_maker.Text = dr[3].ToString();
+                        m_maker_code.Text = dr[4].ToString();
+                        m_desc.Text = dr[5].ToString();
+                        m_comp_type.Text = dr[6].ToString();
+                        m_remarks.Text = dr[7].ToString();
 
                         Enable_M_Input_Details();
                     }
@@ -608,20 +710,130 @@ namespace CMS
             }
 
         }
-        private void Load_Material_Details()
+
+        private void grid_model_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            grid_material.ItemsSource = null;
-            MySqlCommand cmd = new MySqlCommand
+            try
             {
-                Connection = conn
-            };
-            cmd.CommandText = "SELECT ionics_partnumber as 'IONICS PN',customer_partnumber as 'CUSTOMER PN',maker as 'MAKER',maker_code as 'MAKER CODE',description as 'DESCRIPTION',component_type as 'COMPONENT TYPE',remarks as 'REMARKS' FROM ionics_material_details";
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd); 
-              DataTable dt = new DataTable("dt");
-              da.Fill(dt);
-               grid_material.ItemsSource = dt.DefaultView;
+                if (sender != null)
+                {
+                    DataGrid grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        //This is the code which helps to show the data when the row is double clicked.
+                        DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                        DataRowView dr = (DataRowView)dgr.Item;
+
+                        Enable_Model_Input_Details();
+
+                        model_id = Convert.ToInt32(dr[0]);
+                        model_ID.Text = model_id.ToString();
+                        model_fam.Text = dr[1].ToString();
+                        model_model.Text = dr[2].ToString();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
 
+        private void grid_acc_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender != null)
+                {
+                    DataGrid grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        //This is the code which helps to show the data when the row is double clicked.
+                        DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                        DataRowView dr = (DataRowView)dgr.Item;
+
+                        acc_id = Convert.ToInt32(dr[0]);
+                        acc_emp_code.Text = dr[1].ToString();
+                        acc_emp_name.Text = dr[2].ToString();
+                        acc_type.Text = dr[3].ToString();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void grid_line_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender != null)
+                {
+                    DataGrid grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        //This is the code which helps to show the data when the row is double clicked.
+                        DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                        DataRowView dr = (DataRowView)dgr.Item;
+
+                        Enable_Line_Input_Details();
+
+                        line_id = Convert.ToInt32(dr[0]);
+                        line_ID.Text = line_id.ToString();
+                        line_family.Text = dr[2].ToString();
+                        line_model.Text = dr[3].ToString();
+                        line_line.Text = dr[1].ToString();
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void grid_rack_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender != null)
+                {
+                    DataGrid grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        //This is the code which helps to show the data when the row is double clicked.
+                        DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                        DataRowView dr = (DataRowView)dgr.Item;
+
+                        Enable_Rack_Input_Details();
+
+                        rack_id = Convert.ToInt32(dr[0]);
+                        rack_ID.Text = rack_id.ToString();
+                        rack_pn.Text = dr[3].ToString();
+                        rack_rack.Text = dr[1].ToString();
+                        rack_slot.Text = dr[2].ToString();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        // Save Button 
         private void btn_save_m_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -630,21 +842,39 @@ namespace CMS
                 {
                     Connection = conn
                 };
-                cmd.CommandText = "SELECT Count(*) FROM ionics_material_details WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
-                if (Convert.ToInt32(cmd.ExecuteScalar()) == 0)
+                if (m_ipn.Text == "" || m_cpn.Text == "" || m_maker.Text == "" || m_maker_code.Text == "" || m_desc.Text == "" || m_comp_type.Text == "" || m_remarks.Text == "")
                 {
-                    cmd.CommandText = "INSERT INTO ionics_material_details (ionics_partnumber,customer_partnumber,maker,maker_code,description,component_type,remarks) VALUES ('" + m_cpn.Text +"','" + m_ipn.Text +"','" + m_maker.Text + "','" + m_maker_code.Text +"','" + m_desc.Text + "','" + m_comp_type.Text +"','" + m_remarks.Text +"')";
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Added Successfully.");
-                    ClearTextbox_Material();
+                    MessageBox.Show("Please input required details");
+                }
+                else
+                {
+               
+                if (m_id == 0)
+                {
+                    cmd.CommandText = "SELECT Count(*) FROM ionics_material_details WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
+                    if (Convert.ToInt32(cmd.ExecuteScalar()) == 0)
+                    {
+                        cmd.CommandText = "INSERT INTO ionics_material_details (ionics_partnumber,customer_partnumber,maker,maker_code,description,component_type,remarks) VALUES ('" + m_cpn.Text + "','" + m_ipn.Text + "','" + m_maker.Text + "','" + m_maker_code.Text + "','" + m_desc.Text + "','" + m_comp_type.Text + "','" + m_remarks.Text + "')";
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Added Successfully.");
+                            Load_Material_Details();
+                        ClearTextbox_Material();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Existing record found. Kindly verify on the table beside.");
+                    }
                 }
                 else
                 {
                     cmd.CommandText = "UPDATE ionics_material_details SET maker = '" + m_maker.Text + "',maker_code= '" + m_maker_code.Text + "',description = '" + m_desc.Text + "',component_type = '" + m_comp_type.Text + "',remarks ='" + m_remarks.Text + "'  WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Updated Successfully.");
-                    ClearTextbox_Material();
+                        Load_Material_Details();
+                        ClearTextbox_Material();
                 }
+                }
+
             }
             catch (Exception)
             {
@@ -653,17 +883,250 @@ namespace CMS
             }
         }
 
-        private void btn_reset_save_m_Click(object sender, RoutedEventArgs e)
+        private void btn_save_model_Click(object sender, RoutedEventArgs e)
         {
-            ClearTextbox_Material();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn
+                };
+                if (model_fam.Text == "" || model_model.Text == "")
+                {
+                    MessageBox.Show("Please input required details");
+                }
+                else
+                {                    
+                    if (model_id == 0)
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM ionics_model WHERE petname = '" + model_fam.Text + "' and model = '" + model_model.Text + "'";
+                        var count = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (count == 0)
+                        {
+                            cmd.CommandText = "INSERT INTO ionics_model (petname,model) VALUES ('" + model_fam.Text + "', '" + model_model.Text + "')";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Added Successfully.");
+                            Load_Model_Details();
+                            ClearTextbox_Model();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Existing record found. Kindly verify on the table beside.");
+                        }
+                    }
+                    else
+                    {
+                        cmd.CommandText = "UPDATE ionics_model SET petname = '" + model_fam.Text + "',model = '" + model_model.Text + "' WHERE id = '" + model_id + "'";
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Updated Successfully.");
+                        Load_Model_Details();
+                        ClearTextbox_Model();
+                    }
+
+                }
+            }
+            catch (Exception message)
+            {
+                MessageBox.Show(message.ToString());
+            }
         }
 
+        private void btn_save_rack_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn
+                };
+
+                if (rack_pn.Text == "" || rack_rack.Text == "" || rack_slot.Text == "")
+                {
+                    MessageBox.Show("Please input required details");
+                }
+                else
+                {
+                    if (rack_id == 0)
+                    {
+
+                        cmd.CommandText = "SELECT COUNT(*) FROM ionics_rack WHERE partnumber = '" + rack_pn.Text + "' and rack = '" + rack_rack.Text + "' and location = '" + rack_slot.Text + "'";
+                        var count = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (count == 0)
+                        {
+                            cmd.CommandText = "INSERT INTO ionics_rack (partnumber,rack,location) VALUES ('" + rack_pn.Text + "', '" + rack_rack + "','" + rack_slot.Text + "')";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Added Successfully.");
+                            Load_Rack_Details();
+                            ClearTextbox_Rack();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Existing record found. Kindly verify on the table beside.");
+                        }
+                    }
+
+                    else
+                    {
+                        cmd.CommandText = "UPDATE ionics_rack SET partnumber = '" + rack_pn.Text + "',rack = '" + rack_rack + "',location = '" + rack_slot.Text + "' WHERE id= '" + rack_id + "'";
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Updated Successfully.");
+                        Load_Rack_Details();
+                        ClearTextbox_Rack();
+                    }
+                }
+            }
+            catch (Exception message)
+            {
+                MessageBox.Show(message.ToString());
+            }
+        }
+
+        private void btn_save_line_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn
+                };
+                if (line_family.Text == "" || line_line.Text == "" || line_model.Text == "")
+                {
+                    MessageBox.Show("Please input required details");
+                }
+                else
+                {                
+                    cmd.CommandText = " SELECT id from ionics_model where petname = '" + line_family.Text + "' and model = '" + line_model.Text + "'";
+                    var id = cmd.ExecuteScalar().ToString();
+                    if (line_id == 0)
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM ionics_line WHERE line = '" + line_line.Text + "' and model_id = '" + id + "'";
+                        var count = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (count == 0)
+                        {
+                            cmd.CommandText = "INSERT INTO ionics_line (line,model_id) VALUES ('" + line_line.Text + "', '" + id + "')";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Added Successfully.");
+                            Load_Line_Details();
+                            ClearTextbox_Line();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Existing record found. Kindly verify on the table beside.");
+                        }
+                    }
+                    else
+                    {
+                        cmd.CommandText = "UPDATE ionics_line SET line = '" + line_line.Text + "',model_id = '" + id + "' WHERE id = '" + line_id + "')";
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Updated Successfully.");
+                        Load_Line_Details();
+                        ClearTextbox_Line();
+                    }
+                }
+            }
+            catch (Exception message)
+            {
+                MessageBox.Show(message.ToString());
+            }
+        }
+
+        private void btn_save_acc_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn
+                };
+
+                switch (Stats)
+                {
+                    case "ANU":
+                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "" || acc_pass.Text =="" || acc_pass.Text != acc_cpass.Text)
+                        {
+                            MessageBox.Show("Please input required details");
+                        }
+                        else
+                        {
+                            cmd.CommandText = "INSERT INTO ionics_user (user_id,user_pass,user_name,user_type) VALUES ('" + acc_emp_code.Text + "', md5('" + acc_cpass.Text + "'), '"+ acc_emp_name.Text + "','"+ acc_type .Text+ "')";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Added Successfully.");
+                            Load_Account_List();
+                            ClearTextbox_Account();
+                        }
+                        break;
+                    case "EU":
+                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "" )
+                        {
+                            MessageBox.Show("Please input required details");
+                        }
+                        else
+                        {
+                            cmd.CommandText = "UPDATE ionics_user SET user_id = '" + acc_emp_code.Text + "',user_name = '" + acc_emp_name + "' , user_type = '" + acc_type.Text + "' WHERE id = '" + acc_id + "'";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Updated Successfully.");
+                            Load_Account_List();
+                            ClearTextbox_Account();
+                        }
+                        break;
+                    case "CP":
+                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "" || acc_pass.Text == "" || acc_pass.Text != acc_cpass.Text)
+                        {
+                            MessageBox.Show("Please input required details");
+                        }
+                        else
+                        {
+                            cmd.CommandText = "UPDATE ionics_user SET user_pass =md5('" + acc_cpass.Text + "') WHERE id = '" + acc_id + "' and user_id = '" + acc_emp_code.Text + "' and user_type ='" + acc_type.Text + "' ";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Changed Password Successfully.");
+                            Load_Account_List();
+                            ClearTextbox_Account();
+                        }
+                        break;
+                }                              
+            }
+            catch (Exception message)
+            {
+                MessageBox.Show(message.ToString());
+            }
+
+        }
+
+        // Add Button
         private void btn_add_m_Click(object sender, RoutedEventArgs e)
         {
             ClearTextbox_Material();
             Enable_M_Input_Details();
+            m_id = 0;
+            m_ID.Text = m_id.ToString();
 
         }
+
+        private void btn_add_model_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Model();
+            Enable_Model_Input_Details();
+            model_id = 0;
+            model_ID.Text = model_id.ToString();
+        }
+
+        private void btn_add_rack_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Rack();
+            Enable_Rack_Input_Details();
+            rack_id = 0;
+            rack_ID.Text = rack_id.ToString();
+        }
+
+        private void btn_add_line_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Line();
+            Enable_Line_Input_Details();
+            line_id = 0;
+            line_ID.Text = line_id.ToString();
+        }
+
+        // Disable input fields
 
         private void Disable_M_Input_Details()
         {
@@ -677,6 +1140,39 @@ namespace CMS
             btn_save_m.IsEnabled = false;
             btn_reset_save_m.IsEnabled = false;
         }
+
+        private void Disable_Model_Input_Details()
+        {
+            model_fam.IsEnabled = false;
+            model_model.IsEnabled = false;
+            btn_save_m.IsEnabled = false;
+            btn_reset_save_m.IsEnabled = false;
+        }
+
+        private void Disable_Account_Input_Details()
+        {
+            acc_grid.IsEnabled = false;
+        }
+
+        private void Disable_Line_Input_Details()
+        {
+            line_family.IsEnabled = false;
+            line_model.IsEnabled = false;
+            line_line.IsEnabled = false;
+            btn_save_line.IsEnabled = false;
+            btn_reset_save_line.IsEnabled = false;
+        }
+
+        private void Disable_Rack_Input_Details()
+        {
+            rack_pn.IsEnabled = false;
+            rack_rack.IsEnabled = false;
+            rack_slot.IsEnabled = false;
+            btn_save_rack.IsEnabled = false;
+            btn_reset_save_rack.IsEnabled = false;
+        }
+
+        // Enable input fields
         private void Enable_M_Input_Details()
         {
             m_cpn.IsEnabled = true;
@@ -689,6 +1185,39 @@ namespace CMS
             btn_save_m.IsEnabled = true;
             btn_reset_save_m.IsEnabled = true;
         }
+
+        private void Enable_Model_Input_Details()
+        {
+            model_fam.IsEnabled = true;
+            model_model.IsEnabled = true;
+            btn_save_model.IsEnabled = true;
+            btn_reset_save_model.IsEnabled = true;
+        }
+
+        private void Enable_Account_Input_Details()
+        {
+            acc_grid.IsEnabled = true;
+        }
+
+        private void Enable_Line_Input_Details()
+        {
+            line_family.IsEnabled = true;
+            line_model.IsEnabled = true;
+            line_line.IsEnabled = true;
+            btn_save_line.IsEnabled = true;
+            btn_reset_save_line.IsEnabled = true;
+        }
+
+        private void Enable_Rack_Input_Details()
+        {
+            rack_pn.IsEnabled = true;
+            rack_rack.IsEnabled = true;
+            rack_slot.IsEnabled = true;
+            btn_save_rack.IsEnabled = true;
+            btn_reset_save_rack.IsEnabled = true;
+        }
+
+        // Clear Input fields
         private void ClearTextbox_Material()
         {
             m_cpn.Text = "";
@@ -699,6 +1228,129 @@ namespace CMS
             m_comp_type.Text = "";
             m_remarks.Text = "";
         }
+
+        private void ClearTextbox_Model()
+        {
+            model_fam.Text = "";
+            model_model.Text = "";
+        }
+
+        private void ClearTextbox_Line()
+        {
+            line_family.Text = "";
+            line_model.Text = "";
+            line_line.Text = "";
+        }
+
+        private void ClearTextbox_Rack()
+        {
+            rack_pn.Text = "";
+            rack_rack.Text = "";
+            rack_slot.Text = "";
+        }
+
+        private void ClearTextbox_Account()
+        {
+            acc_id = 0;
+            acc_emp_code.Text = "";
+            acc_emp_name.Text = "";
+            acc_type.Text = "";
+            acc_pass.Text = "";
+            acc_cpass.Text = "";
+        }
+
+        // Drop down fields
+
+        private void line_family_DropDownOpened(object sender, EventArgs e)
+        {
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn,
+                CommandText = "select distinct `petname` from `ionics_model`"
+            };
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            line_family.Items.Clear();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                line_family.Items.Add(dr[0].ToString());
+            }
+        }
+
+        private void line_model_DropDownOpened(object sender, EventArgs e)
+        {
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn,
+                CommandText = "select distinct `model` from `ionics_model` where `petname` ='"+ line_family.Text + "'"
+            };
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            line_model.Items.Clear();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                line_model.Items.Add(dr[0].ToString());
+            }
+        }
+
+
+      
+        // Reset input fields
+        private void btn_reset_save_model_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Model();
+        }
+
+        private void btn_reset_save_rack_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Rack();
+        }
+
+        private void btn_reset_save_line_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Line();
+        }
+
+        private void btn_reset_save_acc_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Account();
+        }
+
+        private void btn_reset_save_m_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Material();
+        }
+
+        // ACCOUNTS BUTTON
+        private void btn_ANU_Click(object sender, RoutedEventArgs e)
+        {
+            acc_grid.IsEnabled = true;
+            Enable_Account_Input_Details();
+            acc_id = 0;
+            Stats = "ANU";
+        }
+
+        private void btn_ENU_Click(object sender, RoutedEventArgs e)
+        {
+            acc_grid.IsEnabled = true;
+            acc_pass.IsEnabled = false;
+            acc_pass.IsEnabled = false;
+            Stats = "EU";
+        }
+
+        private void btn_CP_Click(object sender, RoutedEventArgs e)
+        {
+            acc_grid.IsEnabled = true;
+            acc_emp_code.IsEnabled = false;
+            acc_emp_name.IsEnabled = false;
+            acc_type.IsEnabled = false;
+            Stats = "CP";
+        }
+
         #endregion
     }
 }
