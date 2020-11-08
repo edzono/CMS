@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Xceed.Wpf.Toolkit.Primitives;
+using Telerik.Windows.Controls.GridView.Cells;
 
 namespace CMS
 {
@@ -19,6 +21,16 @@ namespace CMS
         private int Total_Receive, Total_Stocks,Total_Return;
         private int acc_id,m_id,model_id,rack_id,line_id;
         private string Stats ="";
+        
+        DataTable dt_oi = new DataTable("dt_oi");
+        DataTable dt_ii = new DataTable("dt_ii");
+
+        private string WithTable, WithColumn;
+        private string receive_select_query = "SELECT a.did 'DID',a.partnumber 'PART NUMBER', b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',quantity 'QUANTITY',invoice_number 'INVOICE NUMBER', pic 'REGISTERED BY',remarks 'REMARKS' FROM ionics_parts a INNER JOIN";
+        private string issuance_select_query = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',issued_qty 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'REGISTERED BY',line 'LINE ISSUED',model 'MODEL',a.date 'DATE PLAN',plan_quantity 'PLAN QUANTITY' from ionics_parts a inner join";
+        private string return_select_query = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',return_quantity 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'REGISTERED BY',line 'FROM LINE',model 'FROM MODEL',a.date 'FROM DATE PLAN' from ionics_parts a inner join";
+
+
         public Menu()
         {
             InitializeComponent();
@@ -28,8 +40,13 @@ namespace CMS
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             conn = DBModule.DBConnect();
+            dt_from.Value = DateTime.Today;
+            dt_to.Value = DateTime.Today.AddDays(1);
+         
+            Load_Overall_Inventory();
         }
 
+      
         #region navbutton click
         private void inventory_Click(object sender, RoutedEventArgs e)
         {
@@ -38,7 +55,7 @@ namespace CMS
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
             ClearTextbox_Receive();
-            CALL_CLEARTEXTBOX_AND_DISABLE()
+            CALL_CLEARTEXTBOX_AND_DISABLE();
         }
 
         private void register_Click(object sender, RoutedEventArgs e)
@@ -47,7 +64,7 @@ namespace CMS
             ClearTextbox_Issue();
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
-            CALL_CLEARTEXTBOX_AND_DISABLE()
+            CALL_CLEARTEXTBOX_AND_DISABLE();
         }
 
         private void transact_Click(object sender, RoutedEventArgs e)
@@ -57,14 +74,14 @@ namespace CMS
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
             ClearTextbox_Receive();
-            CALL_CLEARTEXTBOX_AND_DISABLE()
+            CALL_CLEARTEXTBOX_AND_DISABLE();
         }
 
         private void manage_Click(object sender, RoutedEventArgs e)
         {
             tabs.SelectedIndex = 3;
             CALL_LOAD_MAINTENANCE();
-            CALL_CLEARTEXTBOX_AND_DISABLE()
+            CALL_CLEARTEXTBOX_AND_DISABLE();
             ClearTextbox_Issue();
             ClearTextbox_Issue_selected();
             ClearTextbox_Return();
@@ -337,7 +354,7 @@ namespace CMS
                 {                
                   cmd.CommandText = "UPDATE `ionics_parts` SET `status`= 'PRD', `line` = '" + i_line.Text + "', `model` = '" + i_model.Text + "', `plan_quantity` = '" + i_plan.Text + "', `date` = '" + i_date.Text + "',`processtoken`= 'issued' WHERE did = '"+ i_did.Text +"'";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = "INSERT INTO `ionics_issuance` (`did`, `partnumber`, `timestamp`, `pic`) VALUES ('" + i_did.Text + "','" + i_ipn.Text + "', NOW(),'" + lblname.Text + "')";
+                cmd.CommandText = "INSERT INTO `ionics_issuance` (`did`, `partnumber`, `timestamp`, `pic`,`issued_qty`) VALUES ('" + i_did.Text + "','" + i_ipn.Text + "', NOW(),'" + lblname.Text + "','" + i_qty.Text + "')";
                 cmd.ExecuteNonQuery();
 
                 Total_Receive -= Convert.ToInt32(i_qty.Text);
@@ -1325,6 +1342,9 @@ namespace CMS
             ClearTextbox_Material();
         }
 
+       
+
+
         // ACCOUNTS BUTTON
         private void btn_ANU_Click(object sender, RoutedEventArgs e)
         {
@@ -1333,6 +1353,7 @@ namespace CMS
             acc_id = 0;
             Stats = "ANU";
         }
+
 
         private void btn_ENU_Click(object sender, RoutedEventArgs e)
         {
@@ -1349,6 +1370,172 @@ namespace CMS
             acc_emp_name.IsEnabled = false;
             acc_type.IsEnabled = false;
             Stats = "CP";
+        }
+
+        #endregion
+
+        #region inventory
+        private void dt_to_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (dt_to.Value < dt_from.Value)
+            {
+                MessageBox.Show("Invalid Date Time. Please pick greater than the Time Range From .");
+            }
+        }
+
+   
+        private void Load_Overall_Inventory()
+        {
+            grid_rad_oi.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT c.customer_partnumber as 'EPSON PN',a.partnumber as 'IONICS PN',c.description as 'DESCRIPTION',c.remarks as 'REMARKS',b.rack as 'RACK',b.location as 'SLOT',a.total_receive as 'TOTAL RECEIVE'," +
+                "a.total_return as 'TOTAL RETURN',a.total_stocks as 'TOTAL STOCKS' FROM admdams.ionics_inventory a  inner join ionics_material_details c on a.partnumber = c.ionics_partnumber inner join ionics_rack b on c.customer_partnumber = b.partnumber";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            
+            da.Fill(dt_oi);
+        
+            grid_rad_oi.ItemsSource = dt_oi.DefaultView;
+        }
+
+        private void Load_Individual_Inventory(string did)
+        {
+            grid_rad_ii.ItemsSource = null;
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            cmd.CommandText = "SELECT did as 'DID',partnumber as 'PART NUMBER',lot_number as 'LOT NUMBER',quantity as 'QUANTITY',invoice_number as 'INVOICE NUMBER' ,pic as 'REGISTERED BY', remarks as 'REMARKS',stats as 'STATUS' FROM " +
+                "(select a.did,a.partnumber,lot_number,quantity,invoice_number,pic,remarks,'RECEIVED' as 'stats' from ionics_receive a inner join ionics_parts b on a.partnumber=b.partnumber union all " +
+                "select a.did,a.partnumber,lot_number,issued_qty,invoice_number,pic,remarks,'ISSUED' as 'stats' from ionics_issuance a inner join ionics_parts b on a.partnumber=b.partnumber  union all " +
+                "select a.did,a.partnumber,lot_number,return_quantity,invoice_number,pic,remarks,'RETURNED' as 'stats' from ionics_return a inner join ionics_parts b on a.partnumber=b.partnumber) query WHERE did = '" + did + "'";
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+            da.Fill(dt_ii);
+
+            grid_rad_ii.ItemsSource = dt_ii.DefaultView;
+        }
+
+        private void io_trans_DropDownClosed(object sender, EventArgs e)
+        {
+            switch (io_trans.Text)
+            {
+                case "Receiving":                    
+                    WithTable = receive_select_query + " ionics_receive";
+                    ii_cate.IsEnabled = true;
+                    ii_search.Text = "";
+                    ii_cate.SelectedIndex = -1;
+                    break;
+                case "Issuance":                   
+                    WithTable = issuance_select_query + " ionics_issuance";
+                    ii_cate.IsEnabled = true;
+                    ii_search.Text = "";
+                    ii_cate.SelectedIndex = -1;
+                    break;
+                case "Return":                   
+                    WithTable = return_select_query + " ionics_return";
+                    ii_cate.IsEnabled = true;
+                    ii_search.Text = "";
+                    ii_cate.SelectedIndex = -1;
+                    break;
+                case "All":
+                    ii_cate.SelectedIndex = 0;
+                    ii_search.Text = "";
+                    ii_cate.IsEnabled = false;
+                    ii_search.Focus();
+                    break;
+            }
+           
+        }
+
+        private void ii_cate_DropDownClosed(object sender, EventArgs e)
+        {
+            switch (ii_cate.Text)
+            {
+                case "DID":                    
+                    WithColumn = "a.did";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Ionics PN":
+                    WithColumn = "a.partnumber";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Rack":
+                    WithColumn = "a.rack";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Slot":
+                    WithColumn = "a.location";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Invoice Number":
+                    WithColumn = "a.invoice_number";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Lot Number":
+                    WithColumn = "a.lot_number";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Registered By":
+                    WithColumn = "b.pic";
+                    ii_search.IsEnabled = true;
+                    break;
+                case "Time Range Only":
+                    ii_search.IsEnabled = false;
+                    ii_search.Text = "";
+                    break;
+            }
+        }
+
+        private void btn_serach_individual_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {                           
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn
+            };
+            if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text == "")
+            {
+                grid_rad_ii.ItemsSource = null;
+                    grid_rad_ii.Items.Refresh();
+
+                if (ii_cate.Text == "Time Range Only")
+                {
+                    cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '"+ dt_from.Value + "' AND '" + dt_to.Value + "')";
+                }               
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt_ii);
+                grid_rad_ii.ItemsSource = dt_ii.DefaultView;
+            }
+            else if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text != "")
+            {
+                if (io_trans.Text == "All")
+                {
+                    Load_Individual_Inventory(ii_search.Text.ToUpper());
+                }
+                else
+                {
+                    grid_rad_ii.ItemsSource = null;
+                        grid_rad_ii.Items.Refresh();
+                        cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND "+ WithColumn +" = '"+ ii_search.Text.ToUpper() +"'";
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt_ii);
+                    grid_rad_ii.ItemsSource = dt_ii.DefaultView;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please complete the details.");
+            }
+            }
+            catch (Exception message)
+            {
+
+                MessageBox.Show(message.ToString());
+            }
         }
 
         #endregion
