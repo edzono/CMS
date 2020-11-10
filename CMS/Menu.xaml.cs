@@ -110,11 +110,21 @@ namespace CMS
         #region parts receive
         private void r_did_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            try
             {
-                r_did.Text = r_did.Text.Substring(0, 15).ToUpper().Trim();
-                r_ipn.Focus();
+                if (e.Key == Key.Enter)
+                {
+                    r_did.Text = r_did.Text.Substring(0, 15).ToUpper().Trim();
+                    r_ipn.Focus();
+                }
+
             }
+            catch (Exception )
+            {
+
+                MessageBox.Show("Invalid Input.");
+            }
+            
         }
 
         private void r_ipn_KeyDown(object sender, KeyEventArgs e)
@@ -140,7 +150,17 @@ namespace CMS
                         Total_Stocks= rd.GetInt32(5);
                     }
                     rd.Close();
-                    r_lotnum.Focus();
+                    if (r_supplier.Text == "")
+                    {
+                        MessageBox.Show("Unknown IPN.");
+                        r_ipn.Text = "";
+                        r_ipn.Focus();
+                    }
+                    else
+                    {
+                        r_lotnum.Focus();
+                    }                  
+
                 }
                 catch (Exception message)
                 {
@@ -157,19 +177,25 @@ namespace CMS
 
         private void r_qty_KeyDown(object sender, KeyEventArgs e)
         {
-            if (r_qty.Text != "")
-                r_invonum.Focus();
+            if (e.Key == Key.Enter)
+            {
+                if (r_qty.Text != "")
+                    r_invonum.Focus();
+            }
         }
 
         private void r_invonum_KeyDown(object sender, KeyEventArgs e)
         {
-            if (r_invonum.Text != "")
-                r_remarks.Focus();
+            if (e.Key == Key.Enter)
+            {
+                if (r_invonum.Text != "")
+                    r_remarks.Focus();
+            }
         }
 
         private void btn_reg_Click(object sender, RoutedEventArgs e)
         {
-            if (r_did.Text != "" || r_ipn.Text != "" || r_lotnum.Text != ""|| r_qty.Text != ""|| r_invonum.Text != "")
+            if (r_did.Text != "" && r_ipn.Text != "" && r_lotnum.Text != "" && r_qty.Text != "" && r_invonum.Text != "")
             {
                 if(r_remarks.Text == "")
                 {
@@ -179,7 +205,7 @@ namespace CMS
                 {
                     Connection = conn,
                 };
-                cmd.CommandText = "INSERT INTO `ionics_parts` (`did`, `partnumber`, `lot_number`, `quantity`,`current_qty`, `invoice_number`, `status`, `remarks`,`processtoken`) VALUES ('" + r_did.Text + "','" + r_ipn.Text + "','" + r_lotnum.Text + "','" + r_qty.Text + "','" + r_qty.Text + "','" + r_invonum.Text + "','WHS','" + r_remarks.Text + "','received')";
+                cmd.CommandText = "INSERT INTO `ionics_parts` (`did`, `partnumber`, `lot_number`, `quantity`,`current_quantity`, `invoice_number`, `status`, `remarks`,`processtoken`) VALUES ('" + r_did.Text + "','" + r_ipn.Text + "','" + r_lotnum.Text + "','" + r_qty.Text + "','" + r_qty.Text + "','" + r_invonum.Text + "','WHS','" + r_remarks.Text + "','received')";
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = "INSERT INTO `ionics_receive` (`did`, `partnumber`, `timestamp`, `pic`) VALUES ('" + r_did.Text + "','" + r_ipn.Text + "', NOW(),'" + lblname.Text + "')";
                 cmd.ExecuteNonQuery();
