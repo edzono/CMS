@@ -444,23 +444,79 @@ namespace CMS {
         #line hidden
         
         
-        #line 531 "..\..\Menu.xaml"
+        #line 543 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox s__did;
+        internal System.Windows.Controls.TextBox s_main_did;
         
         #line default
         #line hidden
         
         
-        #line 532 "..\..\Menu.xaml"
+        #line 544 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btn_search_;
+        internal System.Windows.Controls.Button btn_splice;
         
         #line default
         #line hidden
         
         
-        #line 574 "..\..\Menu.xaml"
+        #line 548 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox s_splice_did;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 551 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox s_splice_line;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 552 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox s_splice_model;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 553 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox s_main_line;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 554 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox s_main_model;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 555 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btn_splice_reset;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 557 "..\..\Menu.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox s_splice_qty;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 599 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_pn;
         
@@ -468,7 +524,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 575 "..\..\Menu.xaml"
+        #line 600 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_desc;
         
@@ -476,7 +532,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 576 "..\..\Menu.xaml"
+        #line 601 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_lotnum;
         
@@ -484,7 +540,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 577 "..\..\Menu.xaml"
+        #line 602 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_qty;
         
@@ -492,7 +548,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 578 "..\..\Menu.xaml"
+        #line 603 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_pic;
         
@@ -500,7 +556,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 579 "..\..\Menu.xaml"
+        #line 604 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_status;
         
@@ -508,7 +564,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 580 "..\..\Menu.xaml"
+        #line 605 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_invonum;
         
@@ -516,7 +572,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 582 "..\..\Menu.xaml"
+        #line 607 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_sup;
         
@@ -524,7 +580,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 584 "..\..\Menu.xaml"
+        #line 609 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_remaining_qty;
         
@@ -532,7 +588,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 586 "..\..\Menu.xaml"
+        #line 611 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_scan_did;
         
@@ -540,15 +596,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 598 "..\..\Menu.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.DataGrid sdid_transaction_grid;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 637 "..\..\Menu.xaml"
+        #line 653 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_return;
         
@@ -556,7 +604,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 638 "..\..\Menu.xaml"
+        #line 654 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_reset_return;
         
@@ -564,7 +612,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 639 "..\..\Menu.xaml"
+        #line 655 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_did;
         
@@ -572,7 +620,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 640 "..\..\Menu.xaml"
+        #line 656 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_line;
         
@@ -580,7 +628,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 641 "..\..\Menu.xaml"
+        #line 657 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_model;
         
@@ -588,7 +636,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 642 "..\..\Menu.xaml"
+        #line 658 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_date;
         
@@ -596,7 +644,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 643 "..\..\Menu.xaml"
+        #line 659 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_plan;
         
@@ -604,7 +652,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 644 "..\..\Menu.xaml"
+        #line 660 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox re_reason;
         
@@ -612,7 +660,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 645 "..\..\Menu.xaml"
+        #line 661 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_return_qty;
         
@@ -620,7 +668,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 683 "..\..\Menu.xaml"
+        #line 699 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_pn;
         
@@ -628,7 +676,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 684 "..\..\Menu.xaml"
+        #line 700 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_desc;
         
@@ -636,7 +684,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 685 "..\..\Menu.xaml"
+        #line 701 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_lotnum;
         
@@ -644,7 +692,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 686 "..\..\Menu.xaml"
+        #line 702 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_qty;
         
@@ -652,7 +700,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 687 "..\..\Menu.xaml"
+        #line 703 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_pic;
         
@@ -660,7 +708,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 688 "..\..\Menu.xaml"
+        #line 704 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_status;
         
@@ -668,7 +716,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 689 "..\..\Menu.xaml"
+        #line 705 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_invonum;
         
@@ -676,7 +724,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 691 "..\..\Menu.xaml"
+        #line 707 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox re_sup;
         
@@ -684,7 +732,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 714 "..\..\Menu.xaml"
+        #line 730 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox s_did;
         
@@ -692,7 +740,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 715 "..\..\Menu.xaml"
+        #line 731 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_search;
         
@@ -700,7 +748,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 757 "..\..\Menu.xaml"
+        #line 773 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_pn;
         
@@ -708,7 +756,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 758 "..\..\Menu.xaml"
+        #line 774 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_desc;
         
@@ -716,7 +764,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 759 "..\..\Menu.xaml"
+        #line 775 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_lotnum;
         
@@ -724,7 +772,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 760 "..\..\Menu.xaml"
+        #line 776 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_qty;
         
@@ -732,7 +780,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 761 "..\..\Menu.xaml"
+        #line 777 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_pic;
         
@@ -740,7 +788,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 762 "..\..\Menu.xaml"
+        #line 778 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_status;
         
@@ -748,7 +796,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 763 "..\..\Menu.xaml"
+        #line 779 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_invonum;
         
@@ -756,7 +804,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 765 "..\..\Menu.xaml"
+        #line 781 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_sup;
         
@@ -764,7 +812,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 767 "..\..\Menu.xaml"
+        #line 783 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_remaining_qty;
         
@@ -772,7 +820,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 769 "..\..\Menu.xaml"
+        #line 785 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox d_scan_did;
         
@@ -780,7 +828,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 781 "..\..\Menu.xaml"
+        #line 797 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid did_transaction_grid;
         
@@ -788,7 +836,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 831 "..\..\Menu.xaml"
+        #line 847 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_cpn;
         
@@ -796,7 +844,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 832 "..\..\Menu.xaml"
+        #line 848 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_save_m;
         
@@ -804,7 +852,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 833 "..\..\Menu.xaml"
+        #line 849 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_reset_save_m;
         
@@ -812,7 +860,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 836 "..\..\Menu.xaml"
+        #line 852 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_ipn;
         
@@ -820,7 +868,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 838 "..\..\Menu.xaml"
+        #line 854 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_maker;
         
@@ -828,7 +876,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 840 "..\..\Menu.xaml"
+        #line 856 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_maker_code;
         
@@ -836,7 +884,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 842 "..\..\Menu.xaml"
+        #line 858 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_desc;
         
@@ -844,7 +892,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 844 "..\..\Menu.xaml"
+        #line 860 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_remarks;
         
@@ -852,7 +900,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 845 "..\..\Menu.xaml"
+        #line 861 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_add_m;
         
@@ -860,7 +908,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 847 "..\..\Menu.xaml"
+        #line 863 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_comp_type;
         
@@ -868,7 +916,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 849 "..\..\Menu.xaml"
+        #line 865 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox m_ID;
         
@@ -876,7 +924,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 864 "..\..\Menu.xaml"
+        #line 880 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid grid_material;
         
@@ -884,7 +932,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 891 "..\..\Menu.xaml"
+        #line 907 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox model_fam;
         
@@ -892,7 +940,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 894 "..\..\Menu.xaml"
+        #line 910 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox model_model;
         
@@ -900,7 +948,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 895 "..\..\Menu.xaml"
+        #line 911 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_save_model;
         
@@ -908,7 +956,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 896 "..\..\Menu.xaml"
+        #line 912 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_reset_save_model;
         
@@ -916,7 +964,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 897 "..\..\Menu.xaml"
+        #line 913 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_add_model;
         
@@ -924,7 +972,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 899 "..\..\Menu.xaml"
+        #line 915 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox model_ID;
         
@@ -932,7 +980,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 914 "..\..\Menu.xaml"
+        #line 930 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid grid_model;
         
@@ -940,7 +988,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 945 "..\..\Menu.xaml"
+        #line 961 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox line_line;
         
@@ -948,7 +996,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 946 "..\..\Menu.xaml"
+        #line 962 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox line_family;
         
@@ -956,7 +1004,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 947 "..\..\Menu.xaml"
+        #line 963 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox line_model;
         
@@ -964,7 +1012,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 948 "..\..\Menu.xaml"
+        #line 964 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_save_line;
         
@@ -972,7 +1020,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 949 "..\..\Menu.xaml"
+        #line 965 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_reset_save_line;
         
@@ -980,7 +1028,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 950 "..\..\Menu.xaml"
+        #line 966 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_add_line;
         
@@ -988,7 +1036,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 952 "..\..\Menu.xaml"
+        #line 968 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox line_ID;
         
@@ -996,7 +1044,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 967 "..\..\Menu.xaml"
+        #line 983 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid grid_line;
         
@@ -1004,7 +1052,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 998 "..\..\Menu.xaml"
+        #line 1014 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox rack_slot;
         
@@ -1012,7 +1060,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 999 "..\..\Menu.xaml"
+        #line 1015 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox rack_pn;
         
@@ -1020,7 +1068,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1000 "..\..\Menu.xaml"
+        #line 1016 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox rack_rack;
         
@@ -1028,7 +1076,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1001 "..\..\Menu.xaml"
+        #line 1017 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_save_rack;
         
@@ -1036,7 +1084,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1002 "..\..\Menu.xaml"
+        #line 1018 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_reset_save_rack;
         
@@ -1044,7 +1092,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1003 "..\..\Menu.xaml"
+        #line 1019 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_add_rack;
         
@@ -1052,7 +1100,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1005 "..\..\Menu.xaml"
+        #line 1021 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox rack_ID;
         
@@ -1060,7 +1108,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1020 "..\..\Menu.xaml"
+        #line 1036 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid grid_rack;
         
@@ -1068,7 +1116,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1030 "..\..\Menu.xaml"
+        #line 1046 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid acc_grid;
         
@@ -1076,7 +1124,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1053 "..\..\Menu.xaml"
+        #line 1069 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox acc_cpass;
         
@@ -1084,7 +1132,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1054 "..\..\Menu.xaml"
+        #line 1070 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox acc_pass;
         
@@ -1092,7 +1140,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1056 "..\..\Menu.xaml"
+        #line 1072 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox acc_type;
         
@@ -1100,7 +1148,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1060 "..\..\Menu.xaml"
+        #line 1076 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox acc_emp_code;
         
@@ -1108,7 +1156,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1061 "..\..\Menu.xaml"
+        #line 1077 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_save_acc;
         
@@ -1116,7 +1164,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1062 "..\..\Menu.xaml"
+        #line 1078 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_reset_save_acc;
         
@@ -1124,7 +1172,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1064 "..\..\Menu.xaml"
+        #line 1080 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox acc_emp_name;
         
@@ -1132,7 +1180,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1079 "..\..\Menu.xaml"
+        #line 1095 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid grid_acc;
         
@@ -1140,7 +1188,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1094 "..\..\Menu.xaml"
+        #line 1110 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_CP;
         
@@ -1148,7 +1196,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1095 "..\..\Menu.xaml"
+        #line 1111 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_ANU;
         
@@ -1156,7 +1204,7 @@ namespace CMS {
         #line hidden
         
         
-        #line 1096 "..\..\Menu.xaml"
+        #line 1112 "..\..\Menu.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_ENU;
         
@@ -1496,468 +1544,516 @@ namespace CMS {
             this.i_sup = ((System.Windows.Controls.TextBox)(target));
             return;
             case 48:
-            this.s__did = ((System.Windows.Controls.TextBox)(target));
+            this.s_main_did = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 543 "..\..\Menu.xaml"
+            this.s_main_did.KeyDown += new System.Windows.Input.KeyEventHandler(this.s_main_did_KeyDown);
+            
+            #line default
+            #line hidden
             return;
             case 49:
-            this.btn_search_ = ((System.Windows.Controls.Button)(target));
+            this.btn_splice = ((System.Windows.Controls.Button)(target));
             
-            #line 532 "..\..\Menu.xaml"
-            this.btn_search_.Click += new System.Windows.RoutedEventHandler(this.btn_search_Click);
+            #line 544 "..\..\Menu.xaml"
+            this.btn_splice.Click += new System.Windows.RoutedEventHandler(this.btn_splice_Click);
             
             #line default
             #line hidden
             return;
             case 50:
-            this.s_pn = ((System.Windows.Controls.TextBox)(target));
+            this.s_splice_did = ((System.Windows.Controls.TextBox)(target));
             return;
             case 51:
-            this.s_desc = ((System.Windows.Controls.TextBox)(target));
+            this.s_splice_line = ((System.Windows.Controls.ComboBox)(target));
+            
+            #line 551 "..\..\Menu.xaml"
+            this.s_splice_line.DropDownOpened += new System.EventHandler(this.s_splice_line_DropDownOpened);
+            
+            #line default
+            #line hidden
             return;
             case 52:
-            this.s_lotnum = ((System.Windows.Controls.TextBox)(target));
+            this.s_splice_model = ((System.Windows.Controls.ComboBox)(target));
+            
+            #line 552 "..\..\Menu.xaml"
+            this.s_splice_model.DropDownOpened += new System.EventHandler(this.s_splice_model_DropDownOpened);
+            
+            #line default
+            #line hidden
             return;
             case 53:
-            this.s_qty = ((System.Windows.Controls.TextBox)(target));
+            this.s_main_line = ((System.Windows.Controls.TextBox)(target));
             return;
             case 54:
-            this.s_pic = ((System.Windows.Controls.TextBox)(target));
+            this.s_main_model = ((System.Windows.Controls.TextBox)(target));
             return;
             case 55:
-            this.s_status = ((System.Windows.Controls.TextBox)(target));
+            this.btn_splice_reset = ((System.Windows.Controls.Button)(target));
+            
+            #line 555 "..\..\Menu.xaml"
+            this.btn_splice_reset.Click += new System.Windows.RoutedEventHandler(this.btn_splice_reset_Click);
+            
+            #line default
+            #line hidden
             return;
             case 56:
-            this.s_invonum = ((System.Windows.Controls.TextBox)(target));
+            this.s_splice_qty = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 557 "..\..\Menu.xaml"
+            this.s_splice_qty.PreviewTextInput += new System.Windows.Input.TextCompositionEventHandler(this.s_splice_qty_PreviewTextInput);
+            
+            #line default
+            #line hidden
             return;
             case 57:
-            this.s_sup = ((System.Windows.Controls.TextBox)(target));
+            this.s_pn = ((System.Windows.Controls.TextBox)(target));
             return;
             case 58:
-            this.s_remaining_qty = ((System.Windows.Controls.TextBox)(target));
+            this.s_desc = ((System.Windows.Controls.TextBox)(target));
             return;
             case 59:
-            this.s_scan_did = ((System.Windows.Controls.TextBox)(target));
+            this.s_lotnum = ((System.Windows.Controls.TextBox)(target));
             return;
             case 60:
-            this.sdid_transaction_grid = ((System.Windows.Controls.DataGrid)(target));
+            this.s_qty = ((System.Windows.Controls.TextBox)(target));
             return;
             case 61:
+            this.s_pic = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 62:
+            this.s_status = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 63:
+            this.s_invonum = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 64:
+            this.s_sup = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 65:
+            this.s_remaining_qty = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 66:
+            this.s_scan_did = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 67:
             this.btn_return = ((System.Windows.Controls.Button)(target));
             
-            #line 637 "..\..\Menu.xaml"
+            #line 653 "..\..\Menu.xaml"
             this.btn_return.Click += new System.Windows.RoutedEventHandler(this.btn_return_Click);
             
             #line default
             #line hidden
             return;
-            case 62:
+            case 68:
             this.btn_reset_return = ((System.Windows.Controls.Button)(target));
             
-            #line 638 "..\..\Menu.xaml"
+            #line 654 "..\..\Menu.xaml"
             this.btn_reset_return.Click += new System.Windows.RoutedEventHandler(this.btn_reset_return_Click);
             
             #line default
             #line hidden
             return;
-            case 63:
+            case 69:
             this.re_did = ((System.Windows.Controls.TextBox)(target));
             
-            #line 639 "..\..\Menu.xaml"
+            #line 655 "..\..\Menu.xaml"
             this.re_did.KeyDown += new System.Windows.Input.KeyEventHandler(this.re_did_KeyDown);
             
             #line default
             #line hidden
             return;
-            case 64:
+            case 70:
             this.re_line = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 65:
+            case 71:
             this.re_model = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 66:
+            case 72:
             this.re_date = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 67:
+            case 73:
             this.re_plan = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 68:
+            case 74:
             this.re_reason = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 644 "..\..\Menu.xaml"
+            #line 660 "..\..\Menu.xaml"
             this.re_reason.DropDownOpened += new System.EventHandler(this.re_reason_DropDownOpened);
             
             #line default
             #line hidden
             return;
-            case 69:
+            case 75:
             this.re_return_qty = ((System.Windows.Controls.TextBox)(target));
             
-            #line 645 "..\..\Menu.xaml"
+            #line 661 "..\..\Menu.xaml"
             this.re_return_qty.PreviewTextInput += new System.Windows.Input.TextCompositionEventHandler(this.re_return_qty_PreviewTextInput);
             
             #line default
             #line hidden
             return;
-            case 70:
+            case 76:
             this.re_pn = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 71:
+            case 77:
             this.re_desc = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 72:
+            case 78:
             this.re_lotnum = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 73:
+            case 79:
             this.re_qty = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 74:
+            case 80:
             this.re_pic = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 75:
+            case 81:
             this.re_status = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 76:
+            case 82:
             this.re_invonum = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 77:
+            case 83:
             this.re_sup = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 78:
+            case 84:
             this.s_did = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 79:
+            case 85:
             this.btn_search = ((System.Windows.Controls.Button)(target));
             
-            #line 715 "..\..\Menu.xaml"
+            #line 731 "..\..\Menu.xaml"
             this.btn_search.Click += new System.Windows.RoutedEventHandler(this.btn_search_Click);
             
             #line default
             #line hidden
             return;
-            case 80:
+            case 86:
             this.d_pn = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 81:
+            case 87:
             this.d_desc = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 82:
+            case 88:
             this.d_lotnum = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 83:
+            case 89:
             this.d_qty = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 84:
+            case 90:
             this.d_pic = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 85:
+            case 91:
             this.d_status = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 86:
+            case 92:
             this.d_invonum = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 87:
+            case 93:
             this.d_sup = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 88:
+            case 94:
             this.d_remaining_qty = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 89:
+            case 95:
             this.d_scan_did = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 90:
+            case 96:
             this.did_transaction_grid = ((System.Windows.Controls.DataGrid)(target));
             return;
-            case 91:
+            case 97:
             this.m_cpn = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 92:
+            case 98:
             this.btn_save_m = ((System.Windows.Controls.Button)(target));
             
-            #line 832 "..\..\Menu.xaml"
+            #line 848 "..\..\Menu.xaml"
             this.btn_save_m.Click += new System.Windows.RoutedEventHandler(this.btn_save_m_Click);
             
             #line default
             #line hidden
             return;
-            case 93:
+            case 99:
             this.btn_reset_save_m = ((System.Windows.Controls.Button)(target));
             
-            #line 833 "..\..\Menu.xaml"
+            #line 849 "..\..\Menu.xaml"
             this.btn_reset_save_m.Click += new System.Windows.RoutedEventHandler(this.btn_reset_save_m_Click);
             
             #line default
             #line hidden
             return;
-            case 94:
+            case 100:
             this.m_ipn = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 95:
+            case 101:
             this.m_maker = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 96:
+            case 102:
             this.m_maker_code = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 97:
+            case 103:
             this.m_desc = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 98:
+            case 104:
             this.m_remarks = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 99:
+            case 105:
             this.btn_add_m = ((System.Windows.Controls.Button)(target));
             
-            #line 845 "..\..\Menu.xaml"
+            #line 861 "..\..\Menu.xaml"
             this.btn_add_m.Click += new System.Windows.RoutedEventHandler(this.btn_add_m_Click);
             
             #line default
             #line hidden
             return;
-            case 100:
+            case 106:
             this.m_comp_type = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 101:
+            case 107:
             this.m_ID = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 102:
+            case 108:
             this.grid_material = ((System.Windows.Controls.DataGrid)(target));
             
-            #line 864 "..\..\Menu.xaml"
+            #line 880 "..\..\Menu.xaml"
             this.grid_material.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.grid_material_MouseDoubleClick);
             
             #line default
             #line hidden
             return;
-            case 103:
+            case 109:
             this.model_fam = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 104:
+            case 110:
             this.model_model = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 105:
+            case 111:
             this.btn_save_model = ((System.Windows.Controls.Button)(target));
             
-            #line 895 "..\..\Menu.xaml"
+            #line 911 "..\..\Menu.xaml"
             this.btn_save_model.Click += new System.Windows.RoutedEventHandler(this.btn_save_model_Click);
             
             #line default
             #line hidden
             return;
-            case 106:
+            case 112:
             this.btn_reset_save_model = ((System.Windows.Controls.Button)(target));
             
-            #line 896 "..\..\Menu.xaml"
+            #line 912 "..\..\Menu.xaml"
             this.btn_reset_save_model.Click += new System.Windows.RoutedEventHandler(this.btn_reset_save_model_Click);
             
             #line default
             #line hidden
             return;
-            case 107:
+            case 113:
             this.btn_add_model = ((System.Windows.Controls.Button)(target));
             
-            #line 897 "..\..\Menu.xaml"
+            #line 913 "..\..\Menu.xaml"
             this.btn_add_model.Click += new System.Windows.RoutedEventHandler(this.btn_add_model_Click);
             
             #line default
             #line hidden
             return;
-            case 108:
+            case 114:
             this.model_ID = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 109:
+            case 115:
             this.grid_model = ((System.Windows.Controls.DataGrid)(target));
             
-            #line 914 "..\..\Menu.xaml"
+            #line 930 "..\..\Menu.xaml"
             this.grid_model.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.grid_model_MouseDoubleClick);
             
             #line default
             #line hidden
             return;
-            case 110:
+            case 116:
             this.line_line = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 111:
+            case 117:
             this.line_family = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 946 "..\..\Menu.xaml"
+            #line 962 "..\..\Menu.xaml"
             this.line_family.DropDownOpened += new System.EventHandler(this.line_family_DropDownOpened);
             
             #line default
             #line hidden
             return;
-            case 112:
+            case 118:
             this.line_model = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 947 "..\..\Menu.xaml"
+            #line 963 "..\..\Menu.xaml"
             this.line_model.DropDownOpened += new System.EventHandler(this.line_model_DropDownOpened);
             
             #line default
             #line hidden
             return;
-            case 113:
+            case 119:
             this.btn_save_line = ((System.Windows.Controls.Button)(target));
             
-            #line 948 "..\..\Menu.xaml"
+            #line 964 "..\..\Menu.xaml"
             this.btn_save_line.Click += new System.Windows.RoutedEventHandler(this.btn_save_line_Click);
             
             #line default
             #line hidden
             return;
-            case 114:
+            case 120:
             this.btn_reset_save_line = ((System.Windows.Controls.Button)(target));
             
-            #line 949 "..\..\Menu.xaml"
+            #line 965 "..\..\Menu.xaml"
             this.btn_reset_save_line.Click += new System.Windows.RoutedEventHandler(this.btn_reset_save_line_Click);
             
             #line default
             #line hidden
             return;
-            case 115:
+            case 121:
             this.btn_add_line = ((System.Windows.Controls.Button)(target));
             
-            #line 950 "..\..\Menu.xaml"
+            #line 966 "..\..\Menu.xaml"
             this.btn_add_line.Click += new System.Windows.RoutedEventHandler(this.btn_add_line_Click);
             
             #line default
             #line hidden
             return;
-            case 116:
+            case 122:
             this.line_ID = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 117:
+            case 123:
             this.grid_line = ((System.Windows.Controls.DataGrid)(target));
             
-            #line 967 "..\..\Menu.xaml"
+            #line 983 "..\..\Menu.xaml"
             this.grid_line.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.grid_line_MouseDoubleClick);
             
             #line default
             #line hidden
             return;
-            case 118:
+            case 124:
             this.rack_slot = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 119:
+            case 125:
             this.rack_pn = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 999 "..\..\Menu.xaml"
+            #line 1015 "..\..\Menu.xaml"
             this.rack_pn.DropDownOpened += new System.EventHandler(this.line_family_DropDownOpened);
             
             #line default
             #line hidden
             return;
-            case 120:
+            case 126:
             this.rack_rack = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 121:
+            case 127:
             this.btn_save_rack = ((System.Windows.Controls.Button)(target));
             
-            #line 1001 "..\..\Menu.xaml"
+            #line 1017 "..\..\Menu.xaml"
             this.btn_save_rack.Click += new System.Windows.RoutedEventHandler(this.btn_save_rack_Click);
             
             #line default
             #line hidden
             return;
-            case 122:
+            case 128:
             this.btn_reset_save_rack = ((System.Windows.Controls.Button)(target));
             
-            #line 1002 "..\..\Menu.xaml"
+            #line 1018 "..\..\Menu.xaml"
             this.btn_reset_save_rack.Click += new System.Windows.RoutedEventHandler(this.btn_reset_save_rack_Click);
             
             #line default
             #line hidden
             return;
-            case 123:
+            case 129:
             this.btn_add_rack = ((System.Windows.Controls.Button)(target));
             
-            #line 1003 "..\..\Menu.xaml"
+            #line 1019 "..\..\Menu.xaml"
             this.btn_add_rack.Click += new System.Windows.RoutedEventHandler(this.btn_add_rack_Click);
             
             #line default
             #line hidden
             return;
-            case 124:
+            case 130:
             this.rack_ID = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 125:
+            case 131:
             this.grid_rack = ((System.Windows.Controls.DataGrid)(target));
             
-            #line 1020 "..\..\Menu.xaml"
+            #line 1036 "..\..\Menu.xaml"
             this.grid_rack.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.grid_rack_MouseDoubleClick);
             
             #line default
             #line hidden
             return;
-            case 126:
+            case 132:
             this.acc_grid = ((System.Windows.Controls.Grid)(target));
             return;
-            case 127:
+            case 133:
             this.acc_cpass = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 128:
+            case 134:
             this.acc_pass = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 129:
+            case 135:
             this.acc_type = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 1056 "..\..\Menu.xaml"
+            #line 1072 "..\..\Menu.xaml"
             this.acc_type.DropDownOpened += new System.EventHandler(this.line_model_DropDownOpened);
             
             #line default
             #line hidden
             return;
-            case 130:
+            case 136:
             this.acc_emp_code = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 131:
+            case 137:
             this.btn_save_acc = ((System.Windows.Controls.Button)(target));
             
-            #line 1061 "..\..\Menu.xaml"
+            #line 1077 "..\..\Menu.xaml"
             this.btn_save_acc.Click += new System.Windows.RoutedEventHandler(this.btn_save_acc_Click);
             
             #line default
             #line hidden
             return;
-            case 132:
+            case 138:
             this.btn_reset_save_acc = ((System.Windows.Controls.Button)(target));
             
-            #line 1062 "..\..\Menu.xaml"
+            #line 1078 "..\..\Menu.xaml"
             this.btn_reset_save_acc.Click += new System.Windows.RoutedEventHandler(this.btn_reset_save_acc_Click);
             
             #line default
             #line hidden
             return;
-            case 133:
+            case 139:
             this.acc_emp_name = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 134:
+            case 140:
             this.grid_acc = ((System.Windows.Controls.DataGrid)(target));
             
-            #line 1079 "..\..\Menu.xaml"
+            #line 1095 "..\..\Menu.xaml"
             this.grid_acc.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.grid_acc_MouseDoubleClick);
             
             #line default
             #line hidden
             return;
-            case 135:
+            case 141:
             this.btn_CP = ((System.Windows.Controls.Button)(target));
             
-            #line 1094 "..\..\Menu.xaml"
+            #line 1110 "..\..\Menu.xaml"
             this.btn_CP.Click += new System.Windows.RoutedEventHandler(this.btn_CP_Click);
             
             #line default
             #line hidden
             return;
-            case 136:
+            case 142:
             this.btn_ANU = ((System.Windows.Controls.Button)(target));
             
-            #line 1095 "..\..\Menu.xaml"
+            #line 1111 "..\..\Menu.xaml"
             this.btn_ANU.Click += new System.Windows.RoutedEventHandler(this.btn_ANU_Click);
             
             #line default
             #line hidden
             return;
-            case 137:
+            case 143:
             this.btn_ENU = ((System.Windows.Controls.Button)(target));
             
-            #line 1096 "..\..\Menu.xaml"
+            #line 1112 "..\..\Menu.xaml"
             this.btn_ENU.Click += new System.Windows.RoutedEventHandler(this.btn_ENU_Click);
             
             #line default
