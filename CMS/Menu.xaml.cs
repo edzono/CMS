@@ -606,7 +606,7 @@ namespace CMS
 
             foreach (DataRow dr in dt.Rows)
             {
-                i_line.Items.Add(dr[0].ToString());
+                s_splice_line.Items.Add(dr[0].ToString());
             }
         }
 

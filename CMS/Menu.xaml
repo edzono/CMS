@@ -32,7 +32,7 @@
                 </Grid.Effect>
                 <Grid Margin="0,0,0,46" >
                     <Image Grid.Row="1" Source="ezgif.com-gif-maker.png" Margin="0,0,0,-38" RenderTransformOrigin="0.496,0.329"/>
-                    <materialDesign:Flipper HorizontalAlignment="Right"  VerticalAlignment="Top" Width="255" Style="{StaticResource MaterialDesignCardFlipper}"
+                    <materialDesign:Flipper HorizontalAlignment="Right"  VerticalAlignment="Top" Width="258" Style="{StaticResource MaterialDesignCardFlipper}"
 			 RenderTransformOrigin="0,0" Height="75" Margin="0,81,0,-122">
                         <materialDesign:Flipper.RenderTransform>
                             <TransformGroup>
