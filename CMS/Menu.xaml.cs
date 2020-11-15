@@ -777,7 +777,7 @@ namespace CMS
 
                 did_transaction_grid.ItemsSource = null;
     
-                cmd.CommandText = " SELECT 'DID','TIMESTAMP','PIC','TRANSACTION','QUANTITY','REASON' FROM (SELECT a.did, timestamp, pic, 'RECEIVED', quantity, 'NA' FROM ionics_receive a LEFT JOIN ionics_parts b ON a.did = b.did UNION ALL SELECT did, timestamp, pic, 'ISSUED', '0', 'NA' FROM ionics_issuance UNION ALL SELECT did, timestamp, pic, 'RETURNED', return_quantity, reason FROM ionics_return WHERE did = '" + i_did.Text + "') AS A";
+                cmd.CommandText = " SELECT 'DID','TIMESTAMP','PIC','TRANSACTION','QUANTITY','REASON' FROM (SELECT a.did, timestamp, pic, 'RECEIVED', quantity, 'NA' FROM ionics_receive a LEFT JOIN ionics_parts b ON a.did = b.did UNION ALL SELECT did, timestamp, pic, 'ISSUED', '0', 'NA' FROM ionics_issuance UNION ALL SELECT did, timestamp, pic, 'RETURNED', return_quantity, reason FROM ionics_return UNION ALL SELECT main_did, timestamp, pic, 'SPLICED', quantity, splice_did FROM ionics_splice_parts ) AS A WHERE did = '" + i_did.Text + "')";
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable("dt");
                 da.Fill(dt);

@@ -117,11 +117,11 @@
 		</Border>
 
 		<TabControl x:Name="tabs" Grid.Column="1" Margin="7,0,0,0" BorderBrush="White" Background="White" TabStripPlacement="Left">
-			<TabControl.ItemContainerStyle>
+			<!--<TabControl.ItemContainerStyle>
 				<Style TargetType="{x:Type TabItem}">
 					<Setter Property="Visibility" Value="Collapsed" />
 				</Style>
-			</TabControl.ItemContainerStyle>
+			</TabControl.ItemContainerStyle>-->
 			<TabControl.Resources>
 
 				<Style TargetType="{x:Type TabControl}">
