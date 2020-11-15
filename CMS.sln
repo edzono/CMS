@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS", "CMS\CMS.csproj", "{55853300-2A0E-47F5-AEE2-39853E4D8201}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "C_M_S SETUP", "C_M_S SETUP\C_M_S SETUP.vdproj", "{C4958142-86CE-4F31-AF62-D7068AC3A93A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,9 @@ Global
 		{55853300-2A0E-47F5-AEE2-39853E4D8201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55853300-2A0E-47F5-AEE2-39853E4D8201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55853300-2A0E-47F5-AEE2-39853E4D8201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4958142-86CE-4F31-AF62-D7068AC3A93A}.Debug|Any CPU.ActiveCfg = Debug
+		{C4958142-86CE-4F31-AF62-D7068AC3A93A}.Debug|Any CPU.Build.0 = Debug
+		{C4958142-86CE-4F31-AF62-D7068AC3A93A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

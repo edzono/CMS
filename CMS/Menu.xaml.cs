@@ -47,7 +47,7 @@ namespace CMS
             dt_from.Value = DateTime.Today;
             dt_to.Value = DateTime.Today.AddDays(1);
          
-            Load_Overall_Inventory();
+           
         }
 
       
@@ -1564,6 +1564,7 @@ namespace CMS
         }
 
       
+
         private void btn_CP_Click(object sender, RoutedEventArgs e)
         {
             acc_grid.IsEnabled = true;
@@ -1576,6 +1577,12 @@ namespace CMS
         #endregion
 
         #region inventory
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Load_Overall_Inventory();
+        }
+
         private void dt_to_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (dt_to.Value < dt_from.Value)

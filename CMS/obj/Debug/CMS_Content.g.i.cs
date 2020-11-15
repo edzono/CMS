@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("ezgif.com-gif-maker.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("23.ico")]
 
 
