@@ -32,8 +32,8 @@
 				</Grid.Effect>
 				<Grid Margin="0,0,0,46" >
 					<Image Grid.Row="1" Source="ezgif.com-gif-maker.png" Margin="0,0,0,-38" RenderTransformOrigin="0.496,0.329"/>
-					<materialDesign:Flipper HorizontalAlignment="Right"  VerticalAlignment="Top" Width="261" Style="{StaticResource MaterialDesignCardFlipper}"
-			 RenderTransformOrigin="0,0" Height="75" Margin="-2,81,0,-122">
+					<materialDesign:Flipper HorizontalAlignment="Right"  VerticalAlignment="Top" Width="258" Style="{StaticResource MaterialDesignCardFlipper}"
+			 RenderTransformOrigin="0,0" Height="75" Margin="0,81,0,-121">
 						<materialDesign:Flipper.RenderTransform>
 							<TransformGroup>
 								<ScaleTransform/>
@@ -45,9 +45,9 @@
 						<materialDesign:Flipper.FrontContent>
 							<Button Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="1" Height="65" Background="Transparent" Foreground="#FF3F51B5" BorderBrush="Transparent">
 								<Grid>
-									<materialDesign:PackIcon Kind="AccountCircle" Height="60" Margin="5,0,0,0" Width="60" HorizontalAlignment="Left"/>
-									<TextBlock x:Name="lblname" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="70,5,0,0" Width="158" FontSize="18"/>
-									<TextBlock x:Name="lblid" Text="" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="70,0,0,5" Width="158" FontSize="18"/>
+									<materialDesign:PackIcon Kind="AccountCircle" Height="60" Margin="0,0,0,0" Width="60" HorizontalAlignment="Left"/>
+									<TextBlock x:Name="lblname" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="60,5,0,0" Width="158" FontSize="18"/>
+									<TextBlock x:Name="lblid" Text="" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="60,0,0,5" Width="158" FontSize="18"/>
 								</Grid>
 							</Button>
 						</materialDesign:Flipper.FrontContent>
@@ -234,13 +234,13 @@
 												<ColumnDefinition Width="362*"/>
 											</Grid.ColumnDefinitions>
 											<Grid.RowDefinitions>
-												<RowDefinition Height="6*"/>
-												<RowDefinition Height="521*"/>
+												<RowDefinition Height="37*"/>
+												<RowDefinition Height="490*"/>
 												<RowDefinition Height="12*"/>
 											</Grid.RowDefinitions>
 
 											<telerik:RadGridView x:Name="grid_rad_oi" CanUserFreezeColumns="False"		 RowIndicatorVisibility="Collapsed"
-							 IsFilteringAllowed="False" CanUserSearch="True" GroupRenderMode="Flat" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="1"  VerticalAlignment="Top" Height="517" Width="933" ActionOnLostFocus="None" Foreground="#FF0C0C0C" CanUserDeleteRows="False" CanUserInsertRows="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Grid.ColumnSpan="2" FontSize="11" BorderBrush="White" SearchPanelForeground="#FF191616" VerticalGridLinesBrush="#FFDCDBDB" AlternateRowBackground="White" IsSearchingDeferred="True" GroupPanelForeground="#FFEC2121" GroupPanelBackground="White">
+							 IsFilteringAllowed="False" CanUserSearch="True" GroupRenderMode="Flat" HorizontalAlignment="Left" Margin="10,0,0,0"  VerticalAlignment="Bottom" Height="480" Width="933" ActionOnLostFocus="None" Foreground="#FF0C0C0C" CanUserDeleteRows="False" CanUserInsertRows="False" CanUserResizeColumns="False" CanUserReorderColumns="False" Grid.ColumnSpan="2" FontSize="11" BorderBrush="White" SearchPanelForeground="#FF191616" VerticalGridLinesBrush="#FFDCDBDB" AlternateRowBackground="White" IsSearchingDeferred="True" GroupPanelForeground="#FFEC2121" GroupPanelBackground="White" Grid.Row="1">
 												<telerik:RadGridView.SearchPanelBackground>
 													<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 														<GradientStop Color="#FFDFDFDF" Offset="1"/>
@@ -248,6 +248,7 @@
 													</LinearGradientBrush>
 												</telerik:RadGridView.SearchPanelBackground>
 											</telerik:RadGridView>
+											<Button Content="LOAD INVENTORY" Click="Button_Click" HorizontalAlignment="Left" Margin="8,6,0,0" VerticalAlignment="Top" Width="153" Grid.RowSpan="2"/>
 
 										</Grid>
 									</Border>
@@ -304,6 +305,7 @@
 											<ComboBox x:Name="io_trans" HorizontalAlignment="Left" Margin="78,6,0,0" VerticalAlignment="Top" Width="262" Height="36" Grid.Row="1" Grid.Column="1" DropDownClosed="io_trans_DropDownClosed" FontSize="14">
 												<ComboBoxItem Content="Receiving"/>
 												<ComboBoxItem Content="Issuance"/>
+												<ComboBoxItem Content="Splicing"/>
 												<ComboBoxItem Content="Return"/>
 												<ComboBoxItem Content="All"/>
 											</ComboBox>
@@ -508,6 +510,110 @@
 
 										</Grid>
 									</Border>
+								</Grid>
+
+							</TabItem>
+							<TabItem Header="Parts Splicing" FontWeight="Bold" FontSize="18">
+								<Grid Background="#FFE5E5E5" Height="562" VerticalAlignment="Top" Margin="0,0,0,0">
+									<Border BorderBrush="White" CornerRadius="10" BorderThickness="1" HorizontalAlignment="Left" Height="518" Margin="15,22,0,0" VerticalAlignment="Top" Width="478" Background="#FFF7F7F7">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="153*"/>
+												<ColumnDefinition Width="164*"/>
+												<ColumnDefinition Width="159*"/>
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="20*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="67*"/>
+											</Grid.RowDefinitions>
+											<Label Content="MAIN DID:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="31" Width="113" Grid.Row="1"/>
+											<TextBox x:Name="s_main_did" KeyDown="s_main_did_KeyDown" HorizontalAlignment="Left" Height="37" Margin="20,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+											<Button x:Name="btn_splice" Click="btn_splice_Click"  Content="SPLICE" HorizontalAlignment="Left" Margin="59,10,0,0" Grid.Row="15" VerticalAlignment="Top" Width="105" Height="39" Background="#FF3FB55F" BorderBrush="#FF3FB55F" Grid.Column="1"/>
+											<Label Content="MAIN Line:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.Row="3" Height="31" Width="148" Grid.ColumnSpan="2"/>
+											<Label Content="MAIN Model:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.Row="5" Height="31" Width="148" Grid.ColumnSpan="2"/>
+											<Label Content="SPLICED DID:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="31" Width="123" Grid.Row="7"/>
+											<TextBox x:Name="s_splice_did" HorizontalAlignment="Left" Height="37" Margin="20,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="7"/>
+											<Label Content="Line:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.Row="9" Height="31" Width="148" Grid.ColumnSpan="2"/>
+											<Label Content="Model:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.Row="11" Height="31" Width="148" Grid.ColumnSpan="2"/>
+											<ComboBox x:Name="s_splice_line" HorizontalAlignment="Left" Margin="20,11,0,0" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="9" IsReadOnly="True" DropDownOpened="s_splice_line_DropDownOpened" Height="36"/>
+											<ComboBox x:Name="s_splice_model" HorizontalAlignment="Left" Margin="20,11,0,0" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="11" DropDownOpened="s_splice_model_DropDownOpened" Height="36"/>
+											<TextBox x:Name="s_main_line" IsReadOnly="True" HorizontalAlignment="Left" Height="37" Margin="20,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3"/>
+											<TextBox x:Name="s_main_model" IsReadOnly="True" HorizontalAlignment="Left" Height="37" Margin="20,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5"/>
+											<Button x:Name="btn_splice_reset" Click="btn_splice_reset_Click"  Content="RESET" Grid.Column="2" HorizontalAlignment="Left" Margin="35,10,0,0" Grid.Row="15" VerticalAlignment="Top" Width="105" Height="39" Background="#FFFB2152" BorderBrush="#FFFB2152"/>
+											<Label Content="Quantity:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="31" Width="123" Grid.Row="13"/>
+											<TextBox x:Name="s_splice_qty" PreviewTextInput="s_splice_qty_PreviewTextInput" HorizontalAlignment="Left" Height="37" Margin="20,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="13"/>
+
+										</Grid>
+									</Border>
+									<Border BorderBrush="#FF4F87FF" BorderThickness="2" CornerRadius="10"  HorizontalAlignment="Left" Height="518" Margin="520,22,0,0" VerticalAlignment="Top" Width="447" Background="#FFF9F9F9">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="193*"/>
+												<ColumnDefinition Width="250*"/>
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+												<RowDefinition Height="50*"/>
+												<RowDefinition Height="10*"/>
+											</Grid.RowDefinitions>
+											<Label Content="DID Details" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Foreground="#FF4F87FF" Height="41" Width="156" FontSize="24" Grid.RowSpan="2"/>
+											<Label Content="Part Number:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="4" Height="31" Width="137"/>
+											<Label Content="Description:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="6" Height="31" Width="137"/>
+											<Label Content="Lot Number:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Grid.Row="8" Height="31" Width="156"/>
+											<Label Content="Original Quantity:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="12" Height="31" Width="174"/>
+											<Label Content="Issued By:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="16" Height="31" Width="156"/>
+											<Label Content="Status:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="18" Height="31" Width="156"/>
+											<Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="20" Height="31" Width="156"/>
+											<TextBox x:Name="s_pn"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,0.212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="4" IsEnabled="False"/>
+											<TextBox x:Name="s_desc"  Grid.Column="1" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="6" IsEnabled="False" Margin="10,0.424,0,0"/>
+											<TextBox x:Name="s_lotnum"  Grid.Column="1" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="8" IsEnabled="False" Margin="10,0.424,0,0"/>
+											<TextBox x:Name="s_qty" HorizontalAlignment="Left" Height="37" Margin="9,0.424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="12" IsEnabled="False" Grid.Column="1"/>
+											<TextBox x:Name="s_pic" HorizontalAlignment="Left" Height="37" Margin="9,0.424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="16" IsEnabled="False" Grid.Column="1"/>
+											<TextBox x:Name="s_status" HorizontalAlignment="Left" Height="37" Margin="9,1.424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="18" IsEnabled="False" Grid.Column="1"/>
+											<TextBox x:Name="s_invonum" HorizontalAlignment="Left" Height="37" Margin="9,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="20" IsEnabled="False" Grid.Column="1"/>
+											<Label Content="Supplier:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="10" Height="31" Width="156"/>
+											<TextBox x:Name="s_sup" HorizontalAlignment="Left" Height="37" Margin="9,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="10" IsEnabled="False" Grid.Column="1"/>
+											<Label Content="Remaining Quantity:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="14" Height="31" Width="180"/>
+											<TextBox x:Name="s_remaining_qty"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="14" IsEnabled="False"/>
+											<Label Content="DID:" HorizontalAlignment="Left" Margin="9,4,0,0" VerticalAlignment="Top" Grid.Row="2" Height="31" Width="137"/>
+											<TextBox x:Name="s_scan_did"  Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="9,0.212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Grid.Row="2" IsEnabled="False"/>
+
+										</Grid>
+									</Border>
+
 								</Grid>
 
 							</TabItem>

@@ -17,19 +17,23 @@ namespace CMS
     /// </summary>
     public partial class Menu : Window
     {
+
         public MySqlConnection conn;
         private int Total_Receive, Total_Stocks,Total_Return;
         private int acc_id,m_id,model_id,rack_id,line_id;
         private string Stats ="";
-        
-        DataTable dt_oi = new DataTable("dt_oi");
-        DataTable dt_ii = new DataTable("dt_ii");
 
-        private string WithTable, WithColumn;
-        private string receive_select_query = "SELECT a.did 'DID',a.partnumber 'PART NUMBER', b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',quantity 'QUANTITY',invoice_number 'INVOICE NUMBER', pic 'REGISTERED BY',remarks 'REMARKS' FROM ionics_parts a INNER JOIN";
-        private string issuance_select_query = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',issued_qty 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'REGISTERED BY',line 'LINE ISSUED',model 'MODEL',a.date 'DATE PLAN',plan_quantity 'PLAN QUANTITY' from ionics_parts a inner join";
-        private string return_select_query = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',return_quantity 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'REGISTERED BY',line 'FROM LINE',model 'FROM MODEL',a.date 'FROM DATE PLAN' from ionics_parts a inner join";
+        private DataTable DtOi = new DataTable("DtOi");
+        private DataTable DtIi = new DataTable("DtIi");
 
+        #region Under Inventory
+        private string WithTable, WithColumn ;
+        private readonly string ReceiveSelectQuery = "SELECT a.did 'DID',a.partnumber 'PART NUMBER', b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',quantity 'QUANTITY',invoice_number 'INVOICE NUMBER', pic 'REGISTERED BY',remarks 'REMARKS' FROM ionics_parts a INNER JOIN";
+        private readonly string IssuanceSelectQuery = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',issued_qty 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'ISSUED BY',line 'LINE ISSUED',model 'MODEL',a.date 'DATE PLAN',plan_quantity 'PLAN QUANTITY' from ionics_parts a inner join";
+        private readonly string ReturnSelectQuery = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',return_quantity 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'RETURN BY',line 'FROM LINE',model 'FROM MODEL',a.date 'FROM DATE PLAN' from ionics_parts a inner join";
+        private readonly string SpliceSelectQuery = "SELECT a.did 'DID',b.splice_did 'SPLICE DID' ,a.partnumber 'PART NUMBER', b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',b.quantity 'QUANTITY',invoice_number 'INVOICE NUMBER', pic 'SPLICE BY',remarks 'REMARKS' FROM ionics_parts a INNER JOIN";
+
+        #endregion
 
         public Menu()
         {
@@ -43,7 +47,7 @@ namespace CMS
             dt_from.Value = DateTime.Today;
             dt_to.Value = DateTime.Today.AddDays(1);
          
-            Load_Overall_Inventory();
+           
         }
 
       
@@ -438,6 +442,176 @@ namespace CMS
 
         #endregion
 
+        #region splicing
+        private void s_main_did_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+              
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand
+                    {
+                        Connection = conn,
+                    };
+
+                    cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + s_main_did.Text + "'";
+                    if (cmd.ExecuteScalar().ToString() == "issued")
+                    {
+                        cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`quantity`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`,a.`line`,a.`model` FROM `ionics_parts` a LEFT JOIN `ionics_issuance` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` WHERE a.`did` = '" + s_main_did.Text + "'";
+
+                        MySqlDataReader rd = cmd.ExecuteReader();
+                        while (rd.Read())
+                        {
+                            s_scan_did.Text = s_main_did.Text.ToUpper();
+                            s_pn.Text = rd.GetString(0);
+                            s_desc.Text = rd.GetString(1);
+                            s_sup.Text = rd.GetString(2);
+                            s_lotnum.Text = rd.GetString(3);
+                            s_qty.Text = rd.GetString(4);
+                            s_remaining_qty.Text = rd.GetString(5);
+                            s_pic.Text = rd.GetString(6);
+                            s_status.Text = rd.GetString(7);
+                            s_invonum.Text = rd.GetString(8);
+                            s_main_line.Text= rd.GetString(9);
+                            s_main_model.Text = rd.GetString(10);
+                        }
+                        rd.Close();
+                        s_main_did.Text = "";
+                        s_splice_did.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid DID");
+                        s_main_did.Text = "";
+                        s_main_did.Focus();
+                    }
+
+                }
+                catch (Exception message)
+                {
+                    MessageBox.Show(message.ToString());
+                }
+            }
+        }
+
+
+        private void btn_splice_Click(object sender, RoutedEventArgs e)
+        {
+            if (s_splice_did.Text == "" || s_splice_line.Text == "" || s_splice_model.Text == "" || s_splice_qty.Text == "" || s_scan_did.Text == "")
+            {
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn,
+                };
+                if (Convert.ToInt32(s_splice_qty.Text) <= Convert.ToInt32(s_remaining_qty.Text))
+                {              
+                     cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + s_scan_did.Text + "'";
+                     if (cmd.ExecuteScalar().ToString() == "issued")
+                      {
+                        var Remaining = Convert.ToInt32(s_remaining_qty.Text) - Convert.ToInt32(s_splice_qty.Text);
+                    cmd.CommandText = "UPDATE `ionics_parts` SET   `current_quantity` = '" + Remaining + "' WHERE did = '" + s_scan_did.Text + "'";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO `ionics_splice_parts` (`main_did`,`splice_did`,`quantity`, `line`, `model`,`timestamp`, `pic`) VALUES ('" + s_scan_did.Text + "','" + s_splice_did.Text + "','" + s_splice_qty.Text + "','" + s_splice_line.Text + "','" + s_splice_model.Text + "', NOW(),'" + lblname.Text + "')";
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Spliced Successfully");
+                    ClearTextbox_Splice();
+                     }
+                      else
+                      {
+                          MessageBox.Show("Part cannot be splice.");
+                      }
+                }
+                else
+                {
+                    MessageBox.Show("Splice quantity cannot be greater than remaining quantity of main DID.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Complete necessary details");
+            }
+        }
+
+        private void ClearTextbox_Splice()
+        {
+            s_scan_did.Text = "";
+            s_did.Text = "";
+            s_remaining_qty.Text = "";
+            s_lotnum.Text = "";
+            s_qty.Text = "";
+            s_invonum.Text = "";
+            s_sup.Text = "";
+            s_desc.Text = "";
+            s_pic.Text = "";
+            s_status.Text = "";
+            s_pn.Text = "";
+            s_main_line.Text = "";
+            s_main_model.Text = "";
+
+            s_splice_line.Text = "";
+            s_splice_model.Text = "";
+            s_splice_did.Text = "";
+            s_did.Focus();
+        }
+
+        private void btn_splice_reset_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextbox_Splice();
+        }
+
+        private void s_splice_qty_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void s_splice_model_DropDownOpened(object sender, EventArgs e)
+        {
+            if (s_pn.Text == "")
+            {
+                MessageBox.Show("Need to scan DID first to select model.");
+            }
+            else
+            {
+                DataTable dt = new DataTable("dt");
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn,
+                    CommandText = "select distinct `model` from `ionics_model` a left join `ionics_line` b on a.`ID` = b.`model_id` WHERE b.`line` = '" + s_splice_line.Text + "'"
+                };
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                s_splice_model.Items.Clear();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    s_splice_model.Items.Add(dr[0].ToString());
+                }
+            }
+        }
+
+        private void s_splice_line_DropDownOpened(object sender, EventArgs e)
+        {
+            MySqlCommand cmd = new MySqlCommand
+            {
+                Connection = conn,
+                CommandText = "select distinct `line` from `ionics_line`"
+            };
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable("dt");
+            da.Fill(dt);
+            s_splice_line.Items.Clear();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                s_splice_line.Items.Add(dr[0].ToString());
+            }
+        }
+
+        #endregion
+
         #region parts return
 
         private void re_return_qty_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -603,7 +777,7 @@ namespace CMS
 
                 did_transaction_grid.ItemsSource = null;
     
-                cmd.CommandText = " SELECT 'DID','TIMESTAMP','PIC','TRANSACTION','QUANTITY','REASON' FROM (SELECT a.did, timestamp, pic, 'RECEIVED', quantity, 'NA' FROM ionics_receive a LEFT JOIN ionics_parts b ON a.did = b.did UNION ALL SELECT did, timestamp, pic, 'ISSUED', '0', 'NA' FROM ionics_issuance UNION ALL SELECT did, timestamp, pic, 'RETURNED', return_quantity, reason FROM ionics_return WHERE did = '" + i_did.Text + "') AS A";
+                cmd.CommandText = " SELECT 'DID','TIMESTAMP','PIC','TRANSACTION','QUANTITY','REASON' FROM (SELECT a.did, timestamp, pic, 'RECEIVED', quantity, 'NA' FROM ionics_receive a LEFT JOIN ionics_parts b ON a.did = b.did UNION ALL SELECT did, timestamp, pic, 'ISSUED', '0', 'NA' FROM ionics_issuance UNION ALL SELECT did, timestamp, pic, 'RETURNED', return_quantity, reason FROM ionics_return UNION ALL SELECT main_did, timestamp, pic, 'SPLICED', quantity, splice_did FROM ionics_splice_parts ) AS A WHERE did = '" + i_did.Text + "')";
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable("dt");
                 da.Fill(dt);
@@ -1389,6 +1563,8 @@ namespace CMS
             Stats = "EU";
         }
 
+      
+
         private void btn_CP_Click(object sender, RoutedEventArgs e)
         {
             acc_grid.IsEnabled = true;
@@ -1401,6 +1577,12 @@ namespace CMS
         #endregion
 
         #region inventory
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Load_Overall_Inventory();
+        }
+
         private void dt_to_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (dt_to.Value < dt_from.Value)
@@ -1421,9 +1603,9 @@ namespace CMS
                 "a.total_return as 'TOTAL RETURN',a.total_stocks as 'TOTAL STOCKS' FROM admdams.ionics_inventory a  inner join ionics_material_details c on a.partnumber = c.ionics_partnumber inner join ionics_rack b on c.customer_partnumber = b.partnumber";
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             
-            da.Fill(dt_oi);
+            da.Fill(DtOi);
         
-            grid_rad_oi.ItemsSource = dt_oi.DefaultView;
+            grid_rad_oi.ItemsSource = DtOi.DefaultView;
         }
 
         private void Load_Individual_Inventory(string did)
@@ -1433,15 +1615,16 @@ namespace CMS
             {
                 Connection = conn
             };
-            cmd.CommandText = "SELECT did as 'DID',partnumber as 'PART NUMBER',lot_number as 'LOT NUMBER',quantity as 'QUANTITY',invoice_number as 'INVOICE NUMBER' ,pic as 'REGISTERED BY', remarks as 'REMARKS',stats as 'STATUS' FROM " +
-                "(select a.did,a.partnumber,lot_number,quantity,invoice_number,pic,remarks,'RECEIVED' as 'stats' from ionics_receive a inner join ionics_parts b on a.partnumber=b.partnumber union all " +
-                "select a.did,a.partnumber,lot_number,issued_qty,invoice_number,pic,remarks,'ISSUED' as 'stats' from ionics_issuance a inner join ionics_parts b on a.partnumber=b.partnumber  union all " +
-                "select a.did,a.partnumber,lot_number,return_quantity,invoice_number,pic,remarks,'RETURNED' as 'stats' from ionics_return a inner join ionics_parts b on a.partnumber=b.partnumber) query WHERE did = '" + did + "'";
+            cmd.CommandText = "SELECT did as 'DID',splice_did as 'SPLICE DID',timestamp as 'TIMESTAMP',partnumber as 'PART NUMBER',lot_number as 'LOT NUMBER',quantity as 'QUANTITY',invoice_number as 'INVOICE NUMBER' ,pic as 'PIC', remarks as 'REMARKS',stats as 'STATUS' FROM " +
+                "(select a.did,b.splice_did,b.timestamp,a.partnumber,lot_number,b.quantity,invoice_number,pic,remarks,'SPLICED' as 'stats' from ionics_parts a inner join ionics_splice_parts b on a.did=b.main_did union all " +
+                "select a.did,'',a.timestamp,a.partnumber,lot_number,quantity,invoice_number,pic,remarks,'RECEIVED' as 'stats' from ionics_receive a inner join ionics_parts b on a.partnumber=b.partnumber union all " +
+                "select a.did,'',a.timestamp,a.partnumber,lot_number,issued_qty,invoice_number,pic,remarks,'ISSUED' as 'stats' from ionics_issuance a inner join ionics_parts b on a.partnumber=b.partnumber  union all " +
+                "select a.did,'',a.timestamp,a.partnumber,lot_number,return_quantity,invoice_number,pic,remarks,'RETURNED' as 'stats' from ionics_return a inner join ionics_parts b on a.partnumber=b.partnumber) query WHERE did = '" + did + "'";
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
 
-            da.Fill(dt_ii);
+            da.Fill(DtIi);
 
-            grid_rad_ii.ItemsSource = dt_ii.DefaultView;
+            grid_rad_ii.ItemsSource = DtIi.DefaultView;
         }
 
         private void io_trans_DropDownClosed(object sender, EventArgs e)
@@ -1449,19 +1632,25 @@ namespace CMS
             switch (io_trans.Text)
             {
                 case "Receiving":                    
-                    WithTable = receive_select_query + " ionics_receive";
+                    WithTable = ReceiveSelectQuery + " ionics_receive";
                     ii_cate.IsEnabled = true;
                     ii_search.Text = "";
                     ii_cate.SelectedIndex = -1;
                     break;
                 case "Issuance":                   
-                    WithTable = issuance_select_query + " ionics_issuance";
+                    WithTable = IssuanceSelectQuery + " ionics_issuance";
+                    ii_cate.IsEnabled = true;
+                    ii_search.Text = "";
+                    ii_cate.SelectedIndex = -1;
+                    break;
+                case "Splicing":
+                    WithTable = SpliceSelectQuery + " ionics_splice_parts";
                     ii_cate.IsEnabled = true;
                     ii_search.Text = "";
                     ii_cate.SelectedIndex = -1;
                     break;
                 case "Return":                   
-                    WithTable = return_select_query + " ionics_return";
+                    WithTable = ReturnSelectQuery + " ionics_return";
                     ii_cate.IsEnabled = true;
                     ii_search.Text = "";
                     ii_cate.SelectedIndex = -1;
@@ -1480,32 +1669,40 @@ namespace CMS
         {
             switch (ii_cate.Text)
             {
-                case "DID":                    
-                    WithColumn = "a.did";
+                case "DID":               
+                    if (io_trans.Text == "Splicing")
+                    {
+                        WithColumn = "(a.did = '" + ii_search.Text.ToUpper() + "' Or b.splice_did = '" + ii_search.Text.ToUpper() + "')";
+                    }
+                    else
+                    {
+                        WithColumn = "a.did = '" + ii_search.Text.ToUpper() + "'";
+                    }
+                   
                     ii_search.IsEnabled = true;
                     break;
                 case "Ionics PN":
-                    WithColumn = "a.partnumber";
+                    WithColumn = "a.partnumber = '" + ii_search.Text.ToUpper() + "'";
                     ii_search.IsEnabled = true;
                     break;
                 case "Rack":
-                    WithColumn = "a.rack";
+                    WithColumn = "a.rack = '" + ii_search.Text.ToUpper() + "'";
                     ii_search.IsEnabled = true;
                     break;
                 case "Slot":
-                    WithColumn = "a.location";
+                    WithColumn = "a.location = '" + ii_search.Text.ToUpper() + "'";
                     ii_search.IsEnabled = true;
                     break;
                 case "Invoice Number":
-                    WithColumn = "a.invoice_number";
+                    WithColumn = "a.invoice_number = '" + ii_search.Text.ToUpper() + "'";
                     ii_search.IsEnabled = true;
                     break;
                 case "Lot Number":
-                    WithColumn = "a.lot_number";
+                    WithColumn = "a.lot_number = '" + ii_search.Text.ToUpper() + "'";
                     ii_search.IsEnabled = true;
                     break;
                 case "Registered By":
-                    WithColumn = "b.pic";
+                    WithColumn = "b.pic  = '" + ii_search.Text.ToUpper() + "'";
                     ii_search.IsEnabled = true;
                     break;
                 case "Time Range Only":
@@ -1523,34 +1720,58 @@ namespace CMS
             {
                 Connection = conn
             };
-            if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text == "")
-            {
-                grid_rad_ii.ItemsSource = null;
-                    grid_rad_ii.Items.Refresh();
 
-                if (ii_cate.Text == "Time Range Only")
-                {
-                    cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '"+ dt_from.Value + "' AND '" + dt_to.Value + "')";
-                }               
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                da.Fill(dt_ii);
-                grid_rad_ii.ItemsSource = dt_ii.DefaultView;
-            }
-            else if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text != "")
-            {
-                if (io_trans.Text == "All")
-                {
-                    Load_Individual_Inventory(ii_search.Text.ToUpper());
+                grid_rad_ii.ItemsSource = null;
+                grid_rad_ii.Columns.Clear();
+                grid_rad_ii.Items.Clear();
+                grid_rad_ii.Items.Refresh();
+                if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text == "")
+                {             
+                     if (ii_cate.Text == "Time Range Only")
+                     {
+                       if (io_trans.Text == "Splicing")
+                        {
+                            cmd.CommandText = WithTable + " b ON a.did = b.main_did WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "')";
+                        }
+                        else
+                        {
+                            cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "')";
+                        }
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        da.Fill(DtIi);
+                        grid_rad_ii.ItemsSource = DtIi.DefaultView;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please complete the details.");
+                    }
                 }
-                else
+                else if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text != "")
                 {
-                    grid_rad_ii.ItemsSource = null;
-                        grid_rad_ii.Items.Refresh();
-                        cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND "+ WithColumn +" = '"+ ii_search.Text.ToUpper() +"'";
-                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                    da.Fill(dt_ii);
-                    grid_rad_ii.ItemsSource = dt_ii.DefaultView;
-                }
+                    if (io_trans.Text == "All" && ii_search.Text != "")
+                    {
+                        Load_Individual_Inventory(ii_search.Text.ToUpper());
+                    }
+                    else if(io_trans.Text != "All" && ii_search.Text != "")
+                    {
+                    
+                            if (io_trans.Text == "Splicing")
+                            {
+                                cmd.CommandText = WithTable + " b ON a.did = b.main_did WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND " + WithColumn + " ";
+                            }
+                            else
+                            {
+                                cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND " + WithColumn + " ";
+                            }
+                        
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        da.Fill(DtIi);
+                        grid_rad_ii.ItemsSource = DtIi.DefaultView;
+                    }
+                    else
+                    {
+                            MessageBox.Show("Please complete the details.");
+                    }
             }
             else
             {

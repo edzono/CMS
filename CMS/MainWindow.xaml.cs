@@ -17,6 +17,7 @@ namespace CMS
     {
         private MySqlConnection Conn;
         public string EmpName = "";
+        private string UserType;
 
         public string Createdirectory = @"C:\CMS\Logs";
         public string Path_ = @"C:\CMS\Logs\" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + ".txt";
@@ -69,11 +70,12 @@ namespace CMS
             {
                 try
                 {
-                    MySqlCommand CheckCredentials = new MySqlCommand("SELECT user_name FROM ionics_user where user_id ='" + txt_emp.Text.Trim() + "' and user_pass = md5('"+ txt_pass.Password.Trim() +"')", Conn);
+                    MySqlCommand CheckCredentials = new MySqlCommand("SELECT user_name,user_type FROM ionics_user where user_id ='" + txt_emp.Text.Trim() + "' and user_pass = md5('"+ txt_pass.Password.Trim() +"')", Conn);
                     MySqlDataReader reader = CheckCredentials.ExecuteReader();                  
                     while (reader.Read())
                     {
                         EmpName = reader[0].ToString();
+                        UserType = reader[1].ToString();
                     }
                     if (EmpName != "")
                     {
@@ -81,6 +83,14 @@ namespace CMS
                         Menu menus = new Menu();
                         menus.lblname.Text = EmpName;
                         menus.lblid.Text = txt_emp.Text.ToUpper();
+                        if (UserType == "ADMINISTRATOR")
+                        {
+                            menus.manage.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            menus.manage.Visibility = Visibility.Hidden;
+                        }
                         menus.Show();
                         Close();
                     }
