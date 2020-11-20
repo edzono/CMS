@@ -1,14 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
-using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
-using Xceed.Wpf.Toolkit.Primitives;
-using Telerik.Windows.Controls.GridView.Cells;
 
 namespace CMS
 {
@@ -19,15 +15,15 @@ namespace CMS
     {
 
         public MySqlConnection conn;
-        private int Total_Receive, Total_Stocks,Total_Return;
-        private int acc_id,m_id,model_id,rack_id,line_id;
-        private string Stats ="";
+        private int Total_Receive, Total_Stocks, Total_Return;
+        private int acc_id, m_id, model_id, rack_id, line_id;
+        private string Stats = "";
 
         private DataTable DtOi = new DataTable("DtOi");
         private DataTable DtIi = new DataTable("DtIi");
 
         #region Under Inventory
-        private string WithTable, WithColumn ;
+        private string WithTable, WithColumn;
         private readonly string ReceiveSelectQuery = "SELECT a.did 'DID',a.partnumber 'PART NUMBER', b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',quantity 'QUANTITY',invoice_number 'INVOICE NUMBER', pic 'REGISTERED BY',remarks 'REMARKS' FROM ionics_parts a INNER JOIN";
         private readonly string IssuanceSelectQuery = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',issued_qty 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'ISSUED BY',line 'LINE ISSUED',model 'MODEL',a.date 'DATE PLAN',plan_quantity 'PLAN QUANTITY' from ionics_parts a inner join";
         private readonly string ReturnSelectQuery = "select  a.did 'DID',a.partnumber 'PART NUMBER',b.timestamp 'TIMESTAMP',lot_number 'LOT NUMBER',return_quantity 'QUANTITY',invoice_number 'INVOICE NUMBER',pic 'RETURN BY',line 'FROM LINE',model 'FROM MODEL',a.date 'FROM DATE PLAN' from ionics_parts a inner join";
@@ -46,11 +42,11 @@ namespace CMS
             conn = DBModule.DBConnect();
             dt_from.Value = DateTime.Today;
             dt_to.Value = DateTime.Today.AddDays(1);
-         
-           
+
+
         }
 
-      
+
         #region navbutton click
         private void inventory_Click(object sender, RoutedEventArgs e)
         {
@@ -118,17 +114,17 @@ namespace CMS
             {
                 if (e.Key == Key.Enter)
                 {
-                    r_did.Text = r_did.Text.Substring(0, 15).ToUpper().Trim();
+                    r_did.Text = r_did.Text.Substring(0, 14).ToUpper().Trim();
                     r_ipn.Focus();
                 }
 
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 MessageBox.Show("Invalid Input.");
             }
-            
+
         }
 
         private void r_ipn_KeyDown(object sender, KeyEventArgs e)
@@ -137,7 +133,8 @@ namespace CMS
             {
                 Total_Receive = 0;
                 Total_Stocks = 0;
-                try {
+                try
+                {
                     MySqlCommand cmd = new MySqlCommand
                     {
                         Connection = conn,
@@ -151,7 +148,7 @@ namespace CMS
                         r_desc.Text = rd.GetString(2);
                         r_comptype.Text = rd.GetString(3);
                         Total_Receive = rd.GetInt32(4);
-                        Total_Stocks= rd.GetInt32(5);
+                        Total_Stocks = rd.GetInt32(5);
                     }
                     rd.Close();
                     if (r_supplier.Text == "")
@@ -163,7 +160,7 @@ namespace CMS
                     else
                     {
                         r_lotnum.Focus();
-                    }                  
+                    }
 
                 }
                 catch (Exception message)
@@ -201,7 +198,7 @@ namespace CMS
         {
             if (r_did.Text != "" && r_ipn.Text != "" && r_lotnum.Text != "" && r_qty.Text != "" && r_invonum.Text != "")
             {
-                if(r_remarks.Text == "")
+                if (r_remarks.Text == "")
                 {
                     r_remarks.Text = null;
                 }
@@ -217,7 +214,7 @@ namespace CMS
                 Total_Receive += Convert.ToInt32(r_qty.Text);
                 Total_Stocks += Convert.ToInt32(r_qty.Text);
 
-                cmd.CommandText = "UPDATE `ionics_inventory` SET `total_receive` = '"+ Total_Receive + "' , `total_stocks` = '" + Total_Stocks + "' WHERE  `partnumber` = '"+ r_ipn.Text +"'";
+                cmd.CommandText = "UPDATE `ionics_inventory` SET `total_receive` = '" + Total_Receive + "' , `total_stocks` = '" + Total_Stocks + "' WHERE  `partnumber` = '" + r_ipn.Text + "'";
                 cmd.ExecuteNonQuery();
 
 
@@ -245,7 +242,7 @@ namespace CMS
             r_desc.Text = "";
             r_comptype.Text = "";
 
-            
+
         }
 
         private void btn_reset_reg_Click(object sender, RoutedEventArgs e)
@@ -317,18 +314,20 @@ namespace CMS
                     MySqlCommand cmd = new MySqlCommand
                     {
                         Connection = conn,
-                     };
-
-                    cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + i_did.Text + "'";
-                    if (cmd.ExecuteScalar().ToString() == "received")
+                    };
+                    cmd.CommandText = "SELECT COUNT(*) FROM `ionics_parts` WHERE `did` = '" + i_did.Text + "'";
+                    if (int.Parse(cmd.ExecuteScalar().ToString()) == 1)
                     {
-                        cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`quantity`, b.`pic`, a.`status`, a.`invoice_number`, d.`total_receive`, d.`total_stocks` FROM `ionics_parts` a LEFT JOIN `ionics_receive` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` LEFT JOIN `ionics_inventory` d on a.`partnumber` = d.`partnumber` WHERE a.`did` = '" + i_did.Text + "'";
-                    }
-                    else if (cmd.ExecuteScalar().ToString() == "returned")
-                    {
-                        cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`, d.`total_receive`, d.`total_stocks` FROM `ionics_parts` a LEFT JOIN `ionics_receive` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` LEFT JOIN `ionics_inventory` d on a.`partnumber` = d.`partnumber` WHERE a.`did` = '" + i_did.Text + "'";
-                    }
-                    MySqlDataReader rd = cmd.ExecuteReader();
+                        cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + i_did.Text + "'";
+                        if (cmd.ExecuteScalar().ToString() == "received")
+                        {
+                            cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`quantity`, b.`pic`, a.`status`, a.`invoice_number`, d.`total_receive`, d.`total_stocks` FROM `ionics_parts` a LEFT JOIN `ionics_receive` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` LEFT JOIN `ionics_inventory` d on a.`partnumber` = d.`partnumber` WHERE a.`did` = '" + i_did.Text + "'";
+                        }
+                        else if (cmd.ExecuteScalar().ToString() == "returned")
+                        {
+                            cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`, d.`total_receive`, d.`total_stocks` FROM `ionics_parts` a LEFT JOIN `ionics_receive` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` LEFT JOIN `ionics_inventory` d on a.`partnumber` = d.`partnumber` WHERE a.`did` = '" + i_did.Text + "'";
+                        }
+                        MySqlDataReader rd = cmd.ExecuteReader();
                         while (rd.Read())
                         {
                             i_pn.Text = rd.GetString(0);
@@ -344,7 +343,13 @@ namespace CMS
                         }
                         rd.Close();
                         i_ipn.Focus();
-                    
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unregistered DID");
+                        i_did.Text = "";
+                        i_did.Focus();
+                    }
                 }
                 catch (Exception message)
                 {
@@ -356,8 +361,8 @@ namespace CMS
         private void i_ipn_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            { 
-                if(i_ipn.Text == i_pn.Text)
+            {
+                if (i_ipn.Text == i_pn.Text)
                 {
                     btn_issue.IsEnabled = true;
                     btn_issue.Focus();
@@ -372,30 +377,30 @@ namespace CMS
 
         private void btn_issue_Click(object sender, RoutedEventArgs e)
         {
-            if(i_did.Text == "" || i_ipn.Text =="" || i_line.Text =="" || i_model.Text == "" || i_plan.Text == "" || i_date.Text == "")
+            if (i_did.Text != "" || i_ipn.Text != "" || i_line.Text != "" || i_model.Text != "" || i_plan.Text != "" || i_date.Text != "")
             {
                 MySqlCommand cmd = new MySqlCommand
                 {
                     Connection = conn,
                 };
-
-                cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '"+ i_did.Text +"'";
+                Total_Receive = 0;
+                Total_Stocks = 0;
+                cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + i_did.Text + "'";
                 if (cmd.ExecuteScalar().ToString() == "received")
-                {                
-                  cmd.CommandText = "UPDATE `ionics_parts` SET `status`= 'PRD', `line` = '" + i_line.Text + "', `model` = '" + i_model.Text + "', `plan_quantity` = '" + i_plan.Text + "', `date` = '" + i_date.Text + "',`processtoken`= 'issued' WHERE did = '"+ i_did.Text +"'";
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "INSERT INTO `ionics_issuance` (`did`, `partnumber`, `timestamp`, `pic`,`issued_qty`) VALUES ('" + i_did.Text + "','" + i_ipn.Text + "', NOW(),'" + lblname.Text + "','" + i_qty.Text + "')";
-                cmd.ExecuteNonQuery();
+                {
+                    cmd.CommandText = "UPDATE `ionics_parts` SET `status`= 'PRD', `line` = '" + i_line.Text + "', `model` = '" + i_model.Text + "', `plan_quantity` = '" + i_plan.Text + "', `date` = '" + i_date.Text + "',`processtoken`= 'issued' WHERE did = '" + i_did.Text + "'";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO `ionics_issuance` (`did`, `partnumber`, `timestamp`, `pic`,`issued_qty`) VALUES ('" + i_did.Text + "','" + i_ipn.Text + "', NOW(),'" + lblname.Text + "','" + i_qty.Text + "')";
+                    cmd.ExecuteNonQuery();
 
-                Total_Receive -= Convert.ToInt32(i_qty.Text);
-                Total_Stocks -= Convert.ToInt32(i_qty.Text);
+                    Total_Stocks -= Convert.ToInt32(i_qty.Text);
 
-                cmd.CommandText = "UPDATE `ionics_inventory` SET `total_receive` = '" + Total_Receive + "' , `total_stocks` = '" + Total_Stocks + "' WHERE  `partnumber` = '" + r_ipn.Text + "'";
-                cmd.ExecuteNonQuery();
+                    cmd.CommandText = "UPDATE `ionics_inventory` SET `total_stocks` = '" + Total_Stocks + "' WHERE  `partnumber` = '" + r_ipn.Text + "'";
+                    cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Issued Successfully");
-                ClearTextbox_Issue();
-                i_did.Focus();
+                    MessageBox.Show("Issued Successfully");
+                    ClearTextbox_Issue();
+                    i_did.Focus();
                 }
                 else
                 {
@@ -447,46 +452,52 @@ namespace CMS
         {
             if (e.Key == Key.Enter)
             {
-              
+
                 try
                 {
                     MySqlCommand cmd = new MySqlCommand
                     {
                         Connection = conn,
                     };
-
-                    cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + s_main_did.Text + "'";
-                    if (cmd.ExecuteScalar().ToString() == "issued")
+                    cmd.CommandText = "SELECT COUNT(*) FROM `ionics_parts` WHERE `did` = '" + s_main_did.Text + "'";
+                    if (int.Parse(cmd.ExecuteScalar().ToString()) == 1)
                     {
-                        cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`quantity`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`,a.`line`,a.`model` FROM `ionics_parts` a LEFT JOIN `ionics_issuance` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` WHERE a.`did` = '" + s_main_did.Text + "'";
-
-                        MySqlDataReader rd = cmd.ExecuteReader();
-                        while (rd.Read())
+                        cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + s_main_did.Text + "'";
+                        if (cmd.ExecuteScalar().ToString() == "issued")
                         {
-                            s_scan_did.Text = s_main_did.Text.ToUpper();
-                            s_pn.Text = rd.GetString(0);
-                            s_desc.Text = rd.GetString(1);
-                            s_sup.Text = rd.GetString(2);
-                            s_lotnum.Text = rd.GetString(3);
-                            s_qty.Text = rd.GetString(4);
-                            s_remaining_qty.Text = rd.GetString(5);
-                            s_pic.Text = rd.GetString(6);
-                            s_status.Text = rd.GetString(7);
-                            s_invonum.Text = rd.GetString(8);
-                            s_main_line.Text= rd.GetString(9);
-                            s_main_model.Text = rd.GetString(10);
+                            cmd.CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`quantity`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`,a.`line`,a.`model` FROM `ionics_parts` a LEFT JOIN `ionics_issuance` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` WHERE a.`did` = '" + s_main_did.Text + "'";
+
+                            MySqlDataReader rd = cmd.ExecuteReader();
+                            while (rd.Read())
+                            {
+                                s_scan_did.Text = s_main_did.Text.ToUpper();
+                                s_pn.Text = rd.GetString(0);
+                                s_desc.Text = rd.GetString(1);
+                                s_sup.Text = rd.GetString(2);
+                                s_lotnum.Text = rd.GetString(3);
+                                s_qty.Text = rd.GetString(4);
+                                s_remaining_qty.Text = rd.GetString(5);
+                                s_pic.Text = rd.GetString(6);
+                                s_status.Text = rd.GetString(7);
+                                s_invonum.Text = rd.GetString(8);
+                                s_main_line.Text = rd.GetString(9);
+                                s_main_model.Text = rd.GetString(10);
+                            }
+                            rd.Close();
+                            s_main_did.Text = "";
+                            s_splice_did.Focus();
                         }
-                        rd.Close();
-                        s_main_did.Text = "";
-                        s_splice_did.Focus();
+                        else
+                        {
+                            MessageBox.Show("Invalid DID");
+                            s_main_did.Text = "";
+                            s_main_did.Focus();
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Invalid DID");
-                        s_main_did.Text = "";
-                        s_main_did.Focus();
+                        MessageBox.Show("Unregistered DID");
                     }
-
                 }
                 catch (Exception message)
                 {
@@ -498,30 +509,30 @@ namespace CMS
 
         private void btn_splice_Click(object sender, RoutedEventArgs e)
         {
-            if (s_splice_did.Text == "" || s_splice_line.Text == "" || s_splice_model.Text == "" || s_splice_qty.Text == "" || s_scan_did.Text == "")
+            if (s_splice_did.Text != "" || s_splice_line.Text != "" || s_splice_model.Text != "" || s_splice_qty.Text != "" || s_scan_did.Text != "")
             {
                 MySqlCommand cmd = new MySqlCommand
                 {
                     Connection = conn,
                 };
                 if (Convert.ToInt32(s_splice_qty.Text) <= Convert.ToInt32(s_remaining_qty.Text))
-                {              
-                     cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + s_scan_did.Text + "'";
-                     if (cmd.ExecuteScalar().ToString() == "issued")
-                      {
+                {
+                    cmd.CommandText = "SELECT `processtoken` FROM `ionics_parts` WHERE `did` = '" + s_scan_did.Text + "'";
+                    if (cmd.ExecuteScalar().ToString() == "issued")
+                    {
                         var Remaining = Convert.ToInt32(s_remaining_qty.Text) - Convert.ToInt32(s_splice_qty.Text);
-                    cmd.CommandText = "UPDATE `ionics_parts` SET   `current_quantity` = '" + Remaining + "' WHERE did = '" + s_scan_did.Text + "'";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO `ionics_splice_parts` (`main_did`,`splice_did`,`quantity`, `line`, `model`,`timestamp`, `pic`) VALUES ('" + s_scan_did.Text + "','" + s_splice_did.Text + "','" + s_splice_qty.Text + "','" + s_splice_line.Text + "','" + s_splice_model.Text + "', NOW(),'" + lblname.Text + "')";
-                    cmd.ExecuteNonQuery();
+                        cmd.CommandText = "UPDATE `ionics_parts` SET   `current_quantity` = '" + Remaining + "' WHERE did = '" + s_scan_did.Text + "'";
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "INSERT INTO `ionics_splice_parts` (`main_did`,`splice_did`,`quantity`, `line`, `model`,`timestamp`, `pic`) VALUES ('" + s_scan_did.Text + "','" + s_splice_did.Text + "','" + s_splice_qty.Text + "','" + s_splice_line.Text + "','" + s_splice_model.Text + "', NOW(),'" + lblname.Text + "')";
+                        cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Spliced Successfully");
-                    ClearTextbox_Splice();
-                     }
-                      else
-                      {
-                          MessageBox.Show("Part cannot be splice.");
-                      }
+                        MessageBox.Show("Spliced Successfully");
+                        ClearTextbox_Splice();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Part cannot be splice.");
+                    }
                 }
                 else
                 {
@@ -549,7 +560,7 @@ namespace CMS
             s_pn.Text = "";
             s_main_line.Text = "";
             s_main_model.Text = "";
-
+            s_splice_qty.Text = "";
             s_splice_line.Text = "";
             s_splice_model.Text = "";
             s_splice_did.Text = "";
@@ -622,29 +633,31 @@ namespace CMS
 
         private void btn_return_Click(object sender, RoutedEventArgs e)
         {
-            if(re_pn.Text == "" || re_return_qty.Text == "" || re_reason.Text == "")
+            if (re_pn.Text != "" || re_return_qty.Text != "" || re_reason.Text != "")
             {
                 if (Convert.ToInt32(re_return_qty.Text) <= Convert.ToInt32(re_qty.Text))
-                {                
-                MySqlCommand cmd = new MySqlCommand
                 {
-                    Connection = conn,
-                };
-                cmd.CommandText = "UPDATE `ionics_parts` SET `status`= 'WHS', `current_quantity` = '"+ re_return_qty.Text +"' , `processtoken`= 'returned' WHERE did = '" + i_did.Text + "'";
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "INSERT INTO `ionics_return` (`did`, `partnumber`, `timestamp`, `pic` , `return_quantity` , `reason`) VALUES ('" + i_did.Text + "','" + i_ipn.Text + "', NOW(),'" + lblname.Text + "' ,'" + re_return_qty.Text + "' ,'" + re_reason.Text + "' )";
-                cmd.ExecuteNonQuery();
+                    Total_Return = 0;
+                    Total_Stocks = 0;
+                    MySqlCommand cmd = new MySqlCommand
+                    {
+                        Connection = conn,
+                    };
+                    cmd.CommandText = "UPDATE `ionics_parts` SET `status`= 'WHS', `current_quantity` = '" + re_return_qty.Text + "' , `processtoken`= 'returned' WHERE did = '" + i_did.Text + "'";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO `ionics_return` (`did`, `partnumber`, `timestamp`, `pic` , `return_quantity` , `reason`) VALUES ('" + i_did.Text + "','" + i_ipn.Text + "', NOW(),'" + lblname.Text + "' ,'" + re_return_qty.Text + "' ,'" + re_reason.Text + "' )";
+                    cmd.ExecuteNonQuery();
 
-                Total_Return += Convert.ToInt32(i_qty.Text);
-                Total_Stocks += Convert.ToInt32(i_qty.Text);
+                    Total_Return += Convert.ToInt32(re_return_qty.Text);
+                    Total_Stocks += Convert.ToInt32(re_return_qty.Text);
 
 
-                cmd.CommandText = "UPDATE `ionics_inventory` SET `total_return` = '" + Total_Receive + "' , `total_stocks` = '" + Total_Stocks + "' WHERE  `partnumber` = '" + r_ipn.Text + "'";
-                cmd.ExecuteNonQuery();
+                    cmd.CommandText = "UPDATE `ionics_inventory` SET `total_return` = '" + Total_Receive + "' , `total_stocks` = '" + Total_Stocks + "' WHERE  `partnumber` = '" + r_ipn.Text + "'";
+                    cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Return Successfully");
-                ClearTextbox_Return();
-                re_did.Focus();
+                    MessageBox.Show("Return Successfully");
+                    ClearTextbox_Return();
+                    re_did.Focus();
                 }
                 else
                 {
@@ -656,7 +669,7 @@ namespace CMS
                 MessageBox.Show("Please Complete necessary details");
             }
         }
-              
+
         private void re_reason_DropDownOpened(object sender, System.EventArgs e)
         {
             MySqlCommand cmd = new MySqlCommand
@@ -687,8 +700,10 @@ namespace CMS
                     MySqlCommand cmd = new MySqlCommand
                     {
                         Connection = conn,
-                        CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`, d.`total_receive`, d.`total_stocks`, d.`total_return`, a.`line`, a.`model`, a.`plan_quantity` , a.`date` FROM `ionics_parts` a LEFT JOIN `ionics_issuance` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` LEFT JOIN `ionics_inventory` d on a.`partnumber` = d.`partnumber` WHERE a.`did` = '" + i_did.Text + "';"
+                        CommandText = "SELECT a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number`, d.`total_receive`, d.`total_stocks`, d.`total_return`, a.`line`, a.`model`, a.`plan_quantity` , a.`date` FROM `ionics_parts` a LEFT JOIN `ionics_issuance` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber` LEFT JOIN `ionics_inventory` d on a.`partnumber` = d.`partnumber` WHERE a.`did` = '" + re_did.Text + "';"
+                   
                     };
+                    MessageBox.Show(cmd.CommandText);
                     MySqlDataReader rd = cmd.ExecuteReader();
                     while (rd.Read())
                     {
@@ -728,36 +743,43 @@ namespace CMS
         {
             re_did.Text = "";
             re_pn.Text = "";
-            re_desc.Text ="";
+            re_desc.Text = "";
             re_sup.Text = "";
-            re_lotnum.Text ="";
-            re_qty.Text ="";
-            re_pic.Text ="";
+            re_lotnum.Text = "";
+            re_qty.Text = "";
+            re_pic.Text = "";
             re_status.Text = "";
             re_invonum.Text = "";
-         
+
             re_line.Text = "";
             re_model.Text = "";
             re_plan.Text = "";
             re_date.Text = "";
             re_reason.Text = "";
-            re_return_qty.Text = "";                    
+            re_return_qty.Text = "";
 
         }
 
         #endregion
 
         #region parts inquiry
-     
+        private void s_did_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btn_search_Click(sender, e);
+            }
+        }
 
-        private void btn_search_Click(object sender, RoutedEventArgs e)
+
+        public void btn_search_Click(object sender, RoutedEventArgs e)
         {
             try
-            {           
+            {
                 MySqlCommand cmd = new MySqlCommand
                 {
                     Connection = conn,
-                    CommandText = "SELECT a.`did`, a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`,a.`quantity`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number` FROM `ionics_parts` a LEFT JOIN `ionics_receive` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber`  WHERE a.`did` = '" + i_did.Text + "';"
+                    CommandText = "SELECT a.`did`, a.`partnumber`, c.`description`, c.`maker`, a.`lot_number`,a.`quantity`, a.`current_quantity`, b.`pic`, a.`status`, a.`invoice_number` FROM `ionics_parts` a LEFT JOIN `ionics_receive` b ON a.`did` = b.`did` LEFT JOIN  `ionics_material_details` c ON a.`partnumber` = c.`ionics_partnumber`  WHERE a.`did` = '" + s_did.Text + "';"
                 };
                 MySqlDataReader rd = cmd.ExecuteReader();
                 while (rd.Read())
@@ -776,8 +798,8 @@ namespace CMS
                 rd.Close();
 
                 did_transaction_grid.ItemsSource = null;
-    
-                cmd.CommandText = " SELECT 'DID','TIMESTAMP','PIC','TRANSACTION','QUANTITY','REASON' FROM (SELECT a.did, timestamp, pic, 'RECEIVED', quantity, 'NA' FROM ionics_receive a LEFT JOIN ionics_parts b ON a.did = b.did UNION ALL SELECT did, timestamp, pic, 'ISSUED', '0', 'NA' FROM ionics_issuance UNION ALL SELECT did, timestamp, pic, 'RETURNED', return_quantity, reason FROM ionics_return UNION ALL SELECT main_did, timestamp, pic, 'SPLICED', quantity, splice_did FROM ionics_splice_parts ) AS A WHERE did = '" + i_did.Text + "')";
+
+                cmd.CommandText = "SELECT did as 'DID',timestamp as 'TIMESTAMP',pic as 'PIC', transaction as 'TRANSACTION',quantity as 'QUANTITY',reason as 'REASON' FROM (SELECT a.did, timestamp, pic, 'RECEIVED' as 'transaction', quantity, 'NA' as 'reason' FROM ionics_receive a LEFT JOIN ionics_parts b ON a.did = b.did UNION ALL SELECT did, timestamp, pic, 'ISSUED', '0', 'NA' FROM ionics_issuance UNION ALL SELECT did, timestamp, pic, 'RETURNED', return_quantity, reason FROM ionics_return UNION ALL SELECT main_did, timestamp, pic, 'SPLICED', quantity, splice_did FROM ionics_splice_parts ) AS A WHERE did = '" + s_did.Text + "'";
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable("dt");
                 da.Fill(dt);
@@ -908,7 +930,7 @@ namespace CMS
                         m_id = Convert.ToInt32(dr[0]);
                         m_ID.Text = m_id.ToString();
                         m_ipn.Text = dr[1].ToString();
-                        m_cpn.Text = dr[2].ToString();                       
+                        m_cpn.Text = dr[2].ToString();
                         m_maker.Text = dr[3].ToString();
                         m_maker_code.Text = dr[4].ToString();
                         m_desc.Text = dr[5].ToString();
@@ -1065,31 +1087,31 @@ namespace CMS
                 }
                 else
                 {
-               
-                if (m_id == 0)
-                {
-                    cmd.CommandText = "SELECT Count(*) FROM ionics_material_details WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
-                    if (Convert.ToInt32(cmd.ExecuteScalar()) == 0)
+
+                    if (m_id == 0)
                     {
-                        cmd.CommandText = "INSERT INTO ionics_material_details (ionics_partnumber,customer_partnumber,maker,maker_code,description,component_type,remarks) VALUES ('" + m_cpn.Text + "','" + m_ipn.Text + "','" + m_maker.Text + "','" + m_maker_code.Text + "','" + m_desc.Text + "','" + m_comp_type.Text + "','" + m_remarks.Text + "')";
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Added Successfully.");
+                        cmd.CommandText = "SELECT Count(*) FROM ionics_material_details WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
+                        if (Convert.ToInt32(cmd.ExecuteScalar()) == 0)
+                        {
+                            cmd.CommandText = "INSERT INTO ionics_material_details (ionics_partnumber,customer_partnumber,maker,maker_code,description,component_type,remarks) VALUES ('" + m_cpn.Text + "','" + m_ipn.Text + "','" + m_maker.Text + "','" + m_maker_code.Text + "','" + m_desc.Text + "','" + m_comp_type.Text + "','" + m_remarks.Text + "')";
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Added Successfully.");
                             Load_Material_Details();
-                        ClearTextbox_Material();
+                            ClearTextbox_Material();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Existing record found. Kindly verify on the table beside.");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Existing record found. Kindly verify on the table beside.");
-                    }
-                }
-                else
-                {
-                    cmd.CommandText = "UPDATE ionics_material_details SET maker = '" + m_maker.Text + "',maker_code= '" + m_maker_code.Text + "',description = '" + m_desc.Text + "',component_type = '" + m_comp_type.Text + "',remarks ='" + m_remarks.Text + "'  WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Updated Successfully.");
+                        cmd.CommandText = "UPDATE ionics_material_details SET maker = '" + m_maker.Text + "',maker_code= '" + m_maker_code.Text + "',description = '" + m_desc.Text + "',component_type = '" + m_comp_type.Text + "',remarks ='" + m_remarks.Text + "'  WHERE ionics_partnumber = '" + m_ipn.Text + "' AND customer_partnumber = '" + m_cpn.Text + "' ";
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Updated Successfully.");
                         Load_Material_Details();
                         ClearTextbox_Material();
-                }
+                    }
                 }
 
             }
@@ -1113,7 +1135,7 @@ namespace CMS
                     MessageBox.Show("Please input required details");
                 }
                 else
-                {                    
+                {
                     if (model_id == 0)
                     {
                         cmd.CommandText = "SELECT COUNT(*) FROM ionics_model WHERE petname = '" + model_fam.Text + "' and model = '" + model_model.Text + "'";
@@ -1211,7 +1233,7 @@ namespace CMS
                     MessageBox.Show("Please input required details");
                 }
                 else
-                {                
+                {
                     cmd.CommandText = " SELECT id from ionics_model where petname = '" + line_family.Text + "' and model = '" + line_model.Text + "'";
                     var id = cmd.ExecuteScalar().ToString();
                     if (line_id == 0)
@@ -1259,13 +1281,13 @@ namespace CMS
                 switch (Stats)
                 {
                     case "ANU":
-                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "" || acc_pass.Text =="" || acc_pass.Text != acc_cpass.Text)
+                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "" || acc_pass.Text == "" || acc_pass.Text != acc_cpass.Text)
                         {
                             MessageBox.Show("Please input required details");
                         }
                         else
                         {
-                            cmd.CommandText = "INSERT INTO ionics_user (user_id,user_pass,user_name,user_type) VALUES ('" + acc_emp_code.Text + "', md5('" + acc_cpass.Text + "'), '"+ acc_emp_name.Text + "','"+ acc_type .Text+ "')";
+                            cmd.CommandText = "INSERT INTO ionics_user (user_id,user_pass,user_name,user_type) VALUES ('" + acc_emp_code.Text + "', md5('" + acc_cpass.Text + "'), '" + acc_emp_name.Text + "','" + acc_type.Text + "')";
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Added Successfully.");
                             Load_Account_List();
@@ -1273,7 +1295,7 @@ namespace CMS
                         }
                         break;
                     case "EU":
-                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "" )
+                        if (acc_emp_code.Text == "" || acc_emp_name.Text == "" || acc_type.Text == "")
                         {
                             MessageBox.Show("Please input required details");
                         }
@@ -1300,7 +1322,7 @@ namespace CMS
                             ClearTextbox_Account();
                         }
                         break;
-                }                              
+                }
             }
             catch (Exception message)
             {
@@ -1501,7 +1523,7 @@ namespace CMS
             MySqlCommand cmd = new MySqlCommand
             {
                 Connection = conn,
-                CommandText = "select distinct `model` from `ionics_model` where `petname` ='"+ line_family.Text + "'"
+                CommandText = "select distinct `model` from `ionics_model` where `petname` ='" + line_family.Text + "'"
             };
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable("dt");
@@ -1515,7 +1537,7 @@ namespace CMS
         }
 
 
-      
+
         // Reset input fields
         private void btn_reset_save_model_Click(object sender, RoutedEventArgs e)
         {
@@ -1542,7 +1564,7 @@ namespace CMS
             ClearTextbox_Material();
         }
 
-       
+
 
 
         // ACCOUNTS BUTTON
@@ -1563,7 +1585,7 @@ namespace CMS
             Stats = "EU";
         }
 
-      
+
 
         private void btn_CP_Click(object sender, RoutedEventArgs e)
         {
@@ -1574,6 +1596,12 @@ namespace CMS
             Stats = "CP";
         }
 
+        private void re_did_KeyDown_1(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        
         #endregion
 
         #region inventory
@@ -1591,7 +1619,7 @@ namespace CMS
             }
         }
 
-   
+
         private void Load_Overall_Inventory()
         {
             grid_rad_oi.ItemsSource = null;
@@ -1602,9 +1630,9 @@ namespace CMS
             cmd.CommandText = "SELECT c.customer_partnumber as 'EPSON PN',a.partnumber as 'IONICS PN',c.description as 'DESCRIPTION',c.remarks as 'REMARKS',b.rack as 'RACK',b.location as 'SLOT',a.total_receive as 'TOTAL RECEIVE'," +
                 "a.total_return as 'TOTAL RETURN',a.total_stocks as 'TOTAL STOCKS' FROM admdams.ionics_inventory a  inner join ionics_material_details c on a.partnumber = c.ionics_partnumber inner join ionics_rack b on c.customer_partnumber = b.partnumber";
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            
+
             da.Fill(DtOi);
-        
+
             grid_rad_oi.ItemsSource = DtOi.DefaultView;
         }
 
@@ -1631,13 +1659,13 @@ namespace CMS
         {
             switch (io_trans.Text)
             {
-                case "Receiving":                    
+                case "Receiving":
                     WithTable = ReceiveSelectQuery + " ionics_receive";
                     ii_cate.IsEnabled = true;
                     ii_search.Text = "";
                     ii_cate.SelectedIndex = -1;
                     break;
-                case "Issuance":                   
+                case "Issuance":
                     WithTable = IssuanceSelectQuery + " ionics_issuance";
                     ii_cate.IsEnabled = true;
                     ii_search.Text = "";
@@ -1649,7 +1677,7 @@ namespace CMS
                     ii_search.Text = "";
                     ii_cate.SelectedIndex = -1;
                     break;
-                case "Return":                   
+                case "Return":
                     WithTable = ReturnSelectQuery + " ionics_return";
                     ii_cate.IsEnabled = true;
                     ii_search.Text = "";
@@ -1662,14 +1690,14 @@ namespace CMS
                     ii_search.Focus();
                     break;
             }
-           
+
         }
 
         private void ii_cate_DropDownClosed(object sender, EventArgs e)
         {
             switch (ii_cate.Text)
             {
-                case "DID":               
+                case "DID":
                     if (io_trans.Text == "Splicing")
                     {
                         WithColumn = "(a.did = '" + ii_search.Text.ToUpper() + "' Or b.splice_did = '" + ii_search.Text.ToUpper() + "')";
@@ -1678,7 +1706,7 @@ namespace CMS
                     {
                         WithColumn = "a.did = '" + ii_search.Text.ToUpper() + "'";
                     }
-                   
+
                     ii_search.IsEnabled = true;
                     break;
                 case "Ionics PN":
@@ -1715,21 +1743,21 @@ namespace CMS
         private void btn_serach_individual_Click(object sender, RoutedEventArgs e)
         {
             try
-            {                           
-            MySqlCommand cmd = new MySqlCommand
             {
-                Connection = conn
-            };
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conn
+                };
 
                 grid_rad_ii.ItemsSource = null;
                 grid_rad_ii.Columns.Clear();
                 grid_rad_ii.Items.Clear();
                 grid_rad_ii.Items.Refresh();
                 if (io_trans.Text != "" && ii_cate.Text != "" && ii_search.Text == "")
-                {             
-                     if (ii_cate.Text == "Time Range Only")
-                     {
-                       if (io_trans.Text == "Splicing")
+                {
+                    if (ii_cate.Text == "Time Range Only")
+                    {
+                        if (io_trans.Text == "Splicing")
                         {
                             cmd.CommandText = WithTable + " b ON a.did = b.main_did WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "')";
                         }
@@ -1752,31 +1780,31 @@ namespace CMS
                     {
                         Load_Individual_Inventory(ii_search.Text.ToUpper());
                     }
-                    else if(io_trans.Text != "All" && ii_search.Text != "")
+                    else if (io_trans.Text != "All" && ii_search.Text != "")
                     {
-                    
-                            if (io_trans.Text == "Splicing")
-                            {
-                                cmd.CommandText = WithTable + " b ON a.did = b.main_did WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND " + WithColumn + " ";
-                            }
-                            else
-                            {
-                                cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND " + WithColumn + " ";
-                            }
-                        
+
+                        if (io_trans.Text == "Splicing")
+                        {
+                            cmd.CommandText = WithTable + " b ON a.did = b.main_did WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND " + WithColumn + " ";
+                        }
+                        else
+                        {
+                            cmd.CommandText = WithTable + " b ON a.partnumber = b.partnumber WHERE (b.timestamp BETWEEN '" + dt_from.Value + "' AND '" + dt_to.Value + "') AND " + WithColumn + " ";
+                        }
+
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         da.Fill(DtIi);
                         grid_rad_ii.ItemsSource = DtIi.DefaultView;
                     }
                     else
                     {
-                            MessageBox.Show("Please complete the details.");
+                        MessageBox.Show("Please complete the details.");
                     }
-            }
-            else
-            {
-                MessageBox.Show("Please complete the details.");
-            }
+                }
+                else
+                {
+                    MessageBox.Show("Please complete the details.");
+                }
             }
             catch (Exception message)
             {
